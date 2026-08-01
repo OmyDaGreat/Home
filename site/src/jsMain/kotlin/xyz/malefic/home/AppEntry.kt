@@ -8,13 +8,13 @@ import com.varabyte.kobweb.silk.components.layout.Surface
 import com.varabyte.kobweb.silk.style.common.SmoothColorStyle
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.vh
-import xyz.malefic.home.styles.AppTheme
+import xyz.malefic.home.styles.AppColors
 
 @App
 @Composable
 fun AppEntry(content: @Composable () -> Unit) {
     SilkApp {
-        AppTheme.Provide(AppTheme.default) {
+        AppColors.Provide(AppColors.default) {
             Surface(SmoothColorStyle.toModifier().minHeight(100.vh)) {
                 content()
             }

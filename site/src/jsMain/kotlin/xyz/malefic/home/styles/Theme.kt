@@ -1,9 +1,86 @@
 package xyz.malefic.home.styles
 
+import com.varabyte.kobweb.compose.css.TextTransform
+import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
+import com.varabyte.kobweb.compose.ui.modifiers.fontSize
+import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
+import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
+import com.varabyte.kobweb.compose.ui.modifiers.lineHeight
+import com.varabyte.kobweb.compose.ui.modifiers.textTransform
+import org.jetbrains.compose.web.css.em
+import org.jetbrains.compose.web.css.px
 import xyz.malefic.kutint.BasePalette
 import xyz.malefic.kutint.PaletteDefinition
 import xyz.malefic.kutint.color
 import xyz.malefic.kutint.rgba
+
+object AppFonts {
+    val mono = listOf("JetBrains Mono", "monospace")
+    val sans = listOf("Space Grotesk", "system-ui", "sans-serif")
+}
+
+object AppTypography {
+    val displayLg =
+        Modifier
+            .fontFamily(AppFonts.mono)
+            .fontSize(48.px)
+            .fontWeight(700)
+            .lineHeight(1.1)
+            .letterSpacing((-0.02).em)
+
+    val displayLgMobile =
+        Modifier
+            .fontFamily(AppFonts.mono)
+            .fontSize(32.px)
+            .fontWeight(700)
+            .lineHeight(1.2)
+
+    val headlineMd =
+        Modifier
+            .fontFamily(AppFonts.mono)
+            .fontSize(24.px)
+            .fontWeight(600)
+            .lineHeight(1.4)
+
+    val bodyLg =
+        Modifier
+            .fontFamily(AppFonts.sans)
+            .fontSize(18.px)
+            .fontWeight(400)
+            .lineHeight(1.6)
+
+    val bodyMd =
+        Modifier
+            .fontFamily(AppFonts.sans)
+            .fontSize(16.px)
+            .fontWeight(400)
+            .lineHeight(1.5)
+
+    val codeSm =
+        Modifier
+            .fontFamily(AppFonts.mono)
+            .fontSize(14.px)
+            .fontWeight(400)
+            .lineHeight(1.4)
+
+    val labelCaps =
+        Modifier
+            .fontFamily(AppFonts.mono)
+            .fontSize(12.px)
+            .fontWeight(700)
+            .lineHeight(1.0)
+            .letterSpacing(0.1.em)
+            .textTransform(TextTransform.Uppercase)
+}
+
+object AppSpacing {
+    val gapOuter = 24.px
+    val gapInner = 16.px
+    val containerPadding = 32.px
+    val stackSm = 8.px
+    val stackMd = 16.px
+}
 
 class AppPalette : BasePalette() {
     // ---------------------------------------------------------------
@@ -202,4 +279,4 @@ class AppPalette : BasePalette() {
     val signalVioletTranslucent by color { signalViolet map { it.withAlpha(0.5f) } }
 }
 
-object AppTheme : PaletteDefinition<AppPalette>(AppPalette())
+object AppColors : PaletteDefinition<AppPalette>(AppPalette())

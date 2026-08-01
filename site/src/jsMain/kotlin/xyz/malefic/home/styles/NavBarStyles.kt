@@ -31,8 +31,8 @@ val NavBarStyle =
         Modifier
             .fillMaxWidth()
             .height(60.px)
-            .background(AppTheme.static.surface.variable)
-            .borderBottom(1.px, LineStyle.Solid, AppTheme.static.primary.variable)
+            .background(AppColors.static.surface.variable)
+            .borderBottom(1.px, LineStyle.Solid, AppColors.static.primary.variable)
     }
 
 val NavItemStyle =
@@ -42,7 +42,7 @@ val NavItemStyle =
             .borderRadius(6.px)
             .padding(12.px, 20.px)
             .textDecorationLine(TextDecorationLine.None)
-            .color(AppTheme.static.onSurface.variable)
+            .color(AppColors.static.onSurface.variable)
             .fontSize(16.px)
             .fontWeight(500)
             .transition(Transition.all(0.2.s))
@@ -53,15 +53,15 @@ val InactiveNavItemStyle =
     NavItemStyle.extendedBy {
         hover {
             Modifier
-                .background(AppTheme.static.primaryTranslucent.variable)
-                .color(AppTheme.static.onPrimary.variable)
+                .background(AppColors.static.primaryTranslucent.variable)
+                .color(AppColors.static.onPrimary.variable)
         }
     }
 
 val ActiveNavItemStyle =
     NavItemStyle.extendedByBase {
         Modifier
-            .background(AppTheme.static.primary.variable)
-            .color(AppTheme.static.onPrimary.variable)
+            .background(AppColors.static.primary.variable)
+            .color(AppColors.static.onPrimary.variable)
             .fontWeight(600)
     }
