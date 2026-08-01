@@ -57,6 +57,13 @@ object AppTypography {
             .fontWeight(400)
             .lineHeight(1.5)
 
+    val codeMd =
+        Modifier
+            .fontFamily(AppFonts.mono)
+            .fontSize(16.px)
+            .fontWeight(400)
+            .lineHeight(1.5)
+
     val codeSm =
         Modifier
             .fontFamily(AppFonts.mono)

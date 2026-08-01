@@ -15,6 +15,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.navigation.Link
+import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.vh
@@ -33,7 +34,7 @@ fun NavBarLayout(content: @Composable () -> Unit) {
     Column(Modifier.fillMaxWidth().height(100.vh)) {
         Box(
             NavBarStyle.toModifier(),
-            contentAlignment = Alignment.Center,
+            Alignment.Center,
         ) {
             Row(
                 Modifier
@@ -43,7 +44,7 @@ fun NavBarLayout(content: @Composable () -> Unit) {
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Box(Modifier.flexGrow(1)) {
-                    // Brand/Logo area
+                    SpanText("Malefic Portfolio")
                 }
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
