@@ -3,7 +3,6 @@ package xyz.malefic.home.pages
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -15,12 +14,12 @@ import org.jetbrains.compose.web.dom.Text
 import xyz.malefic.home.components.layouts.NavBarLayout
 import xyz.malefic.home.components.sections.BootSequence
 
+var isBooting by mutableStateOf(true)
+
 @Page
 @Layout(".components.layouts.NoLayout")
 @Composable
 fun HomePage() {
-    var isBooting by remember { mutableStateOf(true) }
-
     if (isBooting) {
         BootSequence { isBooting = false }
     } else {
