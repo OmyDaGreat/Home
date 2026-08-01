@@ -5,6 +5,7 @@ enum class TopLevelPages(
     val route: String,
 ) {
     INDEX("Index", "/"),
+    WORK("Work", "/work"),
     ABOUT("About", "/about"),
     ;
 
