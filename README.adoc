@@ -1,0 +1,14 @@
+= Static Site Template
+
+A simple template for Kobweb sites.
+
+image:https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white[Kotlin]
+
+== Tips
+
+* Since this project is a GitHub template, you can just use the "Use this template" button to start your project.
+* The https://kobweb.varabyte.com/docs/getting-started/what-is-kobweb[Kobweb docs] have a TON of really useful information, so make sure to check it out and refer to it if you're ever unsure about something.
+* I would suggest using the https://github.com/varabyte/kobweb-cli[kobweb cli] to run the project, as it will handle a lot of the setup for you, and it becomes as easy as just running `kobweb run` in the terminal.
+
+== License
+* This project is licensed under the MIT License. See the link:LICENSE[] file for details.
