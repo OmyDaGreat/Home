@@ -1,14 +1,14 @@
 site:
-  title: "Static Site Template"
+  title: "Malefic"
 
 server:
   files:
     dev:
       contentRoot: "build/processedResources/js/main/public"
-      script: "build/kotlin-webpack/js/developmentExecutable/staticsite.js"
-      api: "build/libs/staticsite.jar"
+      script: "build/kotlin-webpack/js/developmentExecutable/home.js"
+      api: "build/libs/home.jar"
     prod:
-      script: "build/kotlin-webpack/js/productionExecutable/staticsite.js"
+      script: "build/kotlin-webpack/js/productionExecutable/home.js"
       siteRoot: ".kobweb/site"
 
   port: 8080

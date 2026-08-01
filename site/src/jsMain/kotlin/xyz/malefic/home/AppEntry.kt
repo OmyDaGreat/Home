@@ -1,4 +1,4 @@
-package xyz.malefic.staticsite
+package xyz.malefic.home
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.ui.modifiers.minHeight
@@ -8,7 +8,7 @@ import com.varabyte.kobweb.silk.components.layout.Surface
 import com.varabyte.kobweb.silk.style.common.SmoothColorStyle
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.vh
-import xyz.malefic.staticsite.styles.AppTheme
+import xyz.malefic.home.styles.AppTheme
 
 @App
 @Composable

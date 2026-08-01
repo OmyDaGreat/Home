@@ -1,4 +1,4 @@
-package xyz.malefic.staticsite.components.layouts
+package xyz.malefic.home.components.layouts
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -19,10 +19,10 @@ import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Text
-import xyz.malefic.staticsite.styles.ActiveNavItemStyle
-import xyz.malefic.staticsite.styles.InactiveNavItemStyle
-import xyz.malefic.staticsite.styles.NavBarStyle
-import xyz.malefic.staticsite.util.TopLevelPages
+import xyz.malefic.home.styles.ActiveNavItemStyle
+import xyz.malefic.home.styles.InactiveNavItemStyle
+import xyz.malefic.home.styles.NavBarStyle
+import xyz.malefic.home.util.TopLevelPages
 
 @Layout
 @Composable

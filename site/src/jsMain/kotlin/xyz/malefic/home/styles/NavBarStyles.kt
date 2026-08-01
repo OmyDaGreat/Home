@@ -1,4 +1,4 @@
-package xyz.malefic.staticsite.styles
+package xyz.malefic.home.styles
 
 import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.css.Transition

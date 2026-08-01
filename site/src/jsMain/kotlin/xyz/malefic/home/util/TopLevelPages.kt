@@ -1,4 +1,4 @@
-package xyz.malefic.staticsite.util
+package xyz.malefic.home.util
 
 enum class TopLevelPages(
     val value: String,
