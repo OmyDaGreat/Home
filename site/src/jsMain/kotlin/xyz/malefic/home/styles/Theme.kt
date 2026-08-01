@@ -7,7 +7,35 @@ import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
 import com.varabyte.kobweb.compose.ui.modifiers.lineHeight
+import com.varabyte.kobweb.compose.ui.modifiers.setVariable
 import com.varabyte.kobweb.compose.ui.modifiers.textTransform
+import com.varabyte.kobweb.silk.components.forms.ButtonVars
+import com.varabyte.kobweb.silk.init.InitSilk
+import com.varabyte.kobweb.silk.init.InitSilkContext
+import com.varabyte.kobweb.silk.init.registerStyleBase
+import com.varabyte.kobweb.silk.style.vars.color.BackgroundColorVar
+import com.varabyte.kobweb.silk.style.vars.color.BorderColorVar
+import com.varabyte.kobweb.silk.style.vars.color.ColorVar
+import com.varabyte.kobweb.silk.style.vars.color.FocusOutlineColorVar
+import com.varabyte.kobweb.silk.style.vars.color.PlaceholderColorVar
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.varabyte.kobweb.silk.theme.colors.cssClass
+import com.varabyte.kobweb.silk.theme.colors.loadFromLocalStorage
+import com.varabyte.kobweb.silk.theme.colors.palette.background
+import com.varabyte.kobweb.silk.theme.colors.palette.border
+import com.varabyte.kobweb.silk.theme.colors.palette.button
+import com.varabyte.kobweb.silk.theme.colors.palette.checkbox
+import com.varabyte.kobweb.silk.theme.colors.palette.color
+import com.varabyte.kobweb.silk.theme.colors.palette.focusOutline
+import com.varabyte.kobweb.silk.theme.colors.palette.input
+import com.varabyte.kobweb.silk.theme.colors.palette.link
+import com.varabyte.kobweb.silk.theme.colors.palette.overlay
+import com.varabyte.kobweb.silk.theme.colors.palette.placeholder
+import com.varabyte.kobweb.silk.theme.colors.palette.switch
+import com.varabyte.kobweb.silk.theme.colors.palette.tab
+import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
+import com.varabyte.kobweb.silk.theme.colors.palette.tooltip
+import com.varabyte.kobweb.silk.theme.colors.systemPreference
 import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.px
 import xyz.malefic.kutint.BasePalette
@@ -287,3 +315,142 @@ class AppPalette : BasePalette() {
 }
 
 object AppColors : PaletteDefinition<AppPalette>(AppPalette())
+
+@InitSilk
+fun initColor(ctx: InitSilkContext) {
+    ctx.config.initialColorMode = ColorMode.loadFromLocalStorage() ?: ColorMode.systemPreference
+
+    ctx.theme.palettes.light.apply {
+        background = AppColors.static.background.light.color
+        color = AppColors.static.onBackground.light.color
+        border = AppColors.static.outlineVariant.light.color
+        focusOutline = AppColors.static.primary.light.color
+        placeholder = AppColors.static.onSurfaceVariant.light.color
+        overlay = rgba(0, 0, 0, 0.5f).color
+
+        input.set(
+            hoveredBorder = AppColors.static.primary.light.color,
+            invalidBorder = AppColors.static.error.light.color,
+            filled = AppColors.static.surfaceVariant.light.color,
+            filledHover =
+                AppColors.static.surfaceVariant.light.color
+                    .darkened(0.05f),
+            filledFocus = AppColors.static.primary.light.color,
+        )
+        button.set(
+            default = AppColors.static.primary.light.color,
+            hover =
+                AppColors.static.primary.light.color
+                    .darkened(0.1f),
+            focus = AppColors.static.primary.light.color,
+            pressed =
+                AppColors.static.primary.light.color
+                    .darkened(0.2f),
+        )
+        checkbox.set(
+            background = AppColors.static.primary.light.color,
+            hover =
+                AppColors.static.primary.light.color
+                    .darkened(0.1f),
+            color = AppColors.static.onPrimary.light.color,
+        )
+        switch.set(
+            backgroundOn = AppColors.static.primary.light.color,
+            backgroundOff = AppColors.static.surfaceVariant.light.color,
+            thumb = AppColors.static.onPrimary.light.color,
+        )
+        tab.set(
+            color = AppColors.static.onSurfaceVariant.light.color,
+            background = AppColors.static.surface.light.color,
+            selectedColor = AppColors.static.primary.light.color,
+            hover = AppColors.static.surfaceVariant.light.color,
+            pressed =
+                AppColors.static.surfaceVariant.light.color
+                    .darkened(0.1f),
+            disabled = AppColors.static.outlineVariant.light.color,
+        )
+        tooltip.set(
+            background = AppColors.static.inverseSurface.light.color,
+            color = AppColors.static.inverseOnSurface.light.color,
+        )
+        link.set(
+            default = AppColors.static.primary.light.color,
+            visited =
+                AppColors.static.primary.light.color
+                    .darkened(0.1f),
+        )
+    }
+
+    ctx.theme.palettes.dark.apply {
+        background = AppColors.static.primary.dark.color
+        color = AppColors.static.onBackground.dark.color
+        border = AppColors.static.outlineVariant.dark.color
+        focusOutline = AppColors.static.primary.dark.color
+        placeholder = AppColors.static.onSurfaceVariant.dark.color
+        overlay = rgba(0, 0, 0, 0.5f).color
+
+        input.set(
+            hoveredBorder = AppColors.static.primary.dark.color,
+            invalidBorder = AppColors.static.error.dark.color,
+            filled = AppColors.static.surfaceVariant.dark.color,
+            filledHover =
+                AppColors.static.surfaceVariant.dark.color
+                    .darkened(0.05f),
+            filledFocus = AppColors.static.primary.dark.color,
+        )
+        button.set(
+            default = AppColors.static.primary.dark.color,
+            hover =
+                AppColors.static.primary.dark.color
+                    .darkened(0.1f),
+            focus = AppColors.static.primary.dark.color,
+            pressed =
+                AppColors.static.primary.dark.color
+                    .darkened(0.2f),
+        )
+        checkbox.set(
+            background = AppColors.static.primary.dark.color,
+            hover =
+                AppColors.static.primary.dark.color
+                    .darkened(0.1f),
+            color = AppColors.static.onPrimary.dark.color,
+        )
+        switch.set(
+            backgroundOn = AppColors.static.primary.dark.color,
+            backgroundOff = AppColors.static.surfaceVariant.dark.color,
+            thumb = AppColors.static.onPrimary.dark.color,
+        )
+        tab.set(
+            color = AppColors.static.onSurfaceVariant.dark.color,
+            background = AppColors.static.surface.dark.color,
+            selectedColor = AppColors.static.primary.dark.color,
+            hover = AppColors.static.surfaceVariant.dark.color,
+            pressed =
+                AppColors.static.surfaceVariant.dark.color
+                    .darkened(0.1f),
+            disabled = AppColors.static.outlineVariant.dark.color,
+        )
+        tooltip.set(
+            background = AppColors.static.inverseSurface.dark.color,
+            color = AppColors.static.inverseOnSurface.dark.color,
+        )
+        link.set(
+            default = AppColors.static.primary.dark.color,
+            visited =
+                AppColors.static.primary.dark.color
+                    .darkened(0.1f),
+        )
+    }
+
+    ColorMode.entries.forEach { colorMode ->
+        ctx.stylesheet.registerStyleBase(".${colorMode.cssClass}") {
+            val palette = colorMode.toPalette()
+            Modifier
+                .setVariable(BackgroundColorVar, palette.background)
+                .setVariable(ColorVar, palette.color)
+                .setVariable(BorderColorVar, palette.border)
+                .setVariable(FocusOutlineColorVar, palette.focusOutline)
+                .setVariable(PlaceholderColorVar, palette.placeholder)
+        }
+    }
+}
