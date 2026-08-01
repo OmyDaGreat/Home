@@ -54,7 +54,7 @@ fun BootSequence(onFinished: () -> Unit = {}) {
 
     LaunchedEffect(allLinesFinished) {
         if (allLinesFinished) {
-            delay(.5.seconds)
+            delay(1.seconds)
             onFinished()
         }
     }

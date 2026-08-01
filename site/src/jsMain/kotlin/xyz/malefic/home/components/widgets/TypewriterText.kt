@@ -10,12 +10,15 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import kotlinx.coroutines.delay
 import xyz.malefic.home.styles.AppTypography
+import kotlin.random.Random
+import kotlin.random.nextInt
 import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun TypewriterText(
     text: String,
-    speed: Int = 25,
+    speed: Int = 30,
+    speedVariance: Int? = 30,
     modifier: Modifier = Modifier,
     onComplete: () -> Unit = {},
 ) {
@@ -24,7 +27,11 @@ fun TypewriterText(
     LaunchedEffect(text) {
         displayedText = ""
         text.forEach { char ->
-            delay(speed.milliseconds)
+            if (speedVariance != null) {
+                delay(Random.nextInt(speed - speedVariance..speed + speedVariance).milliseconds)
+            } else {
+                delay(speed.milliseconds)
+            }
             displayedText += char
         }
         onComplete()
