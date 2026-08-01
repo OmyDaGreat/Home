@@ -1,7 +1,11 @@
 package xyz.malefic.home.styles
 
+import com.varabyte.kobweb.compose.css.StyleVariable
 import com.varabyte.kobweb.compose.css.TextTransform
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Color
+import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
+import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
@@ -9,10 +13,10 @@ import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
 import com.varabyte.kobweb.compose.ui.modifiers.lineHeight
 import com.varabyte.kobweb.compose.ui.modifiers.setVariable
 import com.varabyte.kobweb.compose.ui.modifiers.textTransform
-import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.init.InitSilk
 import com.varabyte.kobweb.silk.init.InitSilkContext
 import com.varabyte.kobweb.silk.init.registerStyleBase
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.vars.color.BackgroundColorVar
 import com.varabyte.kobweb.silk.style.vars.color.BorderColorVar
 import com.varabyte.kobweb.silk.style.vars.color.ColorVar
@@ -36,6 +40,9 @@ import com.varabyte.kobweb.silk.theme.colors.palette.tab
 import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
 import com.varabyte.kobweb.silk.theme.colors.palette.tooltip
 import com.varabyte.kobweb.silk.theme.colors.systemPreference
+import org.jetbrains.compose.web.css.CSSSizeValue
+import org.jetbrains.compose.web.css.CSSUnit
+import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.px
 import xyz.malefic.kutint.BasePalette
@@ -382,7 +389,7 @@ fun initColor(ctx: InitSilkContext) {
     }
 
     ctx.theme.palettes.dark.apply {
-        background = AppColors.static.primary.dark.color
+        background = AppColors.static.background.dark.color
         color = AppColors.static.onBackground.dark.color
         border = AppColors.static.outlineVariant.dark.color
         focusOutline = AppColors.static.primary.dark.color
@@ -454,3 +461,44 @@ fun initColor(ctx: InitSilkContext) {
         }
     }
 }
+
+@InitSilk
+fun initTypography(ctx: InitSilkContext) {
+    ctx.stylesheet.registerStyle("h1, .display-lg") {
+        base { AppTypography.displayLgMobile }
+        Breakpoint.MD { AppTypography.displayLg }
+    }
+
+    ctx.stylesheet.registerStyleBase("h2, .headline-md") {
+        AppTypography.headlineMd
+    }
+
+    ctx.stylesheet.registerStyleBase("h3, .body-lg") {
+        AppTypography.bodyLg
+    }
+
+    ctx.stylesheet.registerStyleBase("body, p, .body-md") {
+        AppTypography.bodyMd
+    }
+
+    ctx.stylesheet.registerStyleBase("code, pre, .code-sm") {
+        AppTypography.codeSm
+    }
+
+    ctx.stylesheet.registerStyleBase(".code-md") {
+        AppTypography.codeMd
+    }
+
+    ctx.stylesheet.registerStyleBase("button, .label-caps") {
+        AppTypography.labelCaps
+    }
+
+    ctx.stylesheet.registerStyleBase("::selection") {
+        Modifier
+            .backgroundColor(StyleVariable.PropertyValue<Color>("kutint-signalViolet").value(null))
+            .color(StyleVariable.PropertyValue<Color>("kutint-paperWhite").value(null))
+    }
+}
+
+val Number.rem: CSSSizeValue<CSSUnit.rem>
+    get() = this.cssRem
