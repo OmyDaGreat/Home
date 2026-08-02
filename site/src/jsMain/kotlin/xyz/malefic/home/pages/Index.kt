@@ -38,7 +38,7 @@ fun HomePage() {
     if (isBooting) {
         BootSequence { isBooting = false }
     } else {
-        NavBarLayout {
+        MainLayout {
             SimpleGrid(numColumns(base = 1, lg = 6), Modifier.fillMaxSize().gap(16.px)) {
                 TerminalTile(
                     title = "~/README.md",
