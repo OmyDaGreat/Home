@@ -110,8 +110,8 @@ fun TopNavBar() {
 
     Row(
         TopNavContainerStyle.toModifier(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
+        Arrangement.SpaceBetween,
+        Alignment.CenterVertically,
     ) {
         SpanText("ROOT@PORTFOLIO", BrandStyle.toModifier())
 

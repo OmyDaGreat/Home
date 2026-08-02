@@ -1,4 +1,4 @@
-@file:Layout(".components.layouts.NavBarLayout")
+@file:Layout(".components.layouts.MainLayout")
 
 package xyz.malefic.home.pages
 

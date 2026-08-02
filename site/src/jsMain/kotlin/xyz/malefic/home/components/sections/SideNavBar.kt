@@ -1,6 +1,7 @@
 package xyz.malefic.home.components.sections
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.Cursor.Companion.Pointer
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -21,27 +22,23 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.height
-import com.varabyte.kobweb.compose.ui.modifiers.left
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.opacity
 import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.ui.modifiers.position
 import com.varabyte.kobweb.compose.ui.modifiers.size
-import com.varabyte.kobweb.compose.ui.modifiers.top
 import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.compose.ui.modifiers.width
-import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.silk.components.icons.fa.FaCode
 import com.varabyte.kobweb.silk.components.icons.fa.FaTerminal
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.style.extendedByBase
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.LineStyle
-import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.s
@@ -55,13 +52,9 @@ val SideNavContainerStyle =
             Modifier
                 .display(DisplayStyle.None)
                 .width(256.px)
-                .position(Position.Fixed)
-                .left(0.px)
-                .top(48.px)
                 .height(100.vh)
                 .background(AppColors.static.surfaceContainerLowest.variable)
                 .borderRight(1.px, LineStyle.Solid, AppColors.static.outline.variable)
-                .zIndex(40)
         }
         Breakpoint.LG {
             Modifier.display(DisplayStyle.Flex)
@@ -74,9 +67,9 @@ val SideNavItemStyle =
             Modifier
                 .fillMaxWidth()
                 .padding(topBottom = 8.px, leftRight = 16.px)
-                .color(AppColors.static.onSurfaceVariant.variable)
+                .color(AppColors.static.onSecondary.variable)
                 .transition(Transition.of("background-color", 0.1.s))
-                .cursor(com.varabyte.kobweb.compose.css.Cursor.Pointer)
+                .cursor(Pointer)
         }
         hover {
             Modifier.background(AppColors.static.secondaryTranslucent.variable)
@@ -84,7 +77,7 @@ val SideNavItemStyle =
     }
 
 val ActiveSideNavItemStyle =
-    CssStyle.base {
+    SideNavItemStyle.extendedByBase {
         Modifier
             .background(AppColors.static.secondary.variable)
             .color(AppColors.static.onSecondary.variable)
@@ -122,16 +115,11 @@ val StatusTextStyle =
             .margin(left = 8.px)
     }
 
-val SideNavTitleStyle =
-    CssStyle.base {
-        AppTypography.labelCaps.color(AppColors.static.onSurface.variable)
-    }
-
 @Composable
-fun SideNavBar() {
+fun SideNavBar() =
     Column(SideNavContainerStyle.toModifier()) {
         Column(SideNavHeaderStyle.toModifier()) {
-            SpanText("~/dev/portfolio", SideNavTitleStyle.toModifier())
+            SpanText("~/dev/portfolio", AppTypography.labelCaps.color(AppColors.static.onSurface.current))
             SpanText("branch: master", AppTypography.codeSm.opacity(0.5))
         }
 
@@ -150,7 +138,6 @@ fun SideNavBar() {
             SpanText(" SYSTEM ONLINE", StatusTextStyle.toModifier())
         }
     }
-}
 
 @Composable
 private fun SideNavItem(
@@ -159,9 +146,7 @@ private fun SideNavItem(
     icon: @Composable (Modifier) -> Unit,
 ) {
     Row(
-        SideNavItemStyle
-            .toModifier()
-            .then(if (isActive) ActiveSideNavItemStyle.toModifier() else Modifier),
+        (if (isActive) ActiveSideNavItemStyle else SideNavItemStyle).toModifier(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         icon(Modifier.margin(right = 8.px).fontSize(14.px))
