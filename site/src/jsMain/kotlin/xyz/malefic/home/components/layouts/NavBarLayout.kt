@@ -3,71 +3,47 @@ package xyz.malefic.home.components.layouts
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
-import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.flexGrow
-import com.varabyte.kobweb.compose.ui.modifiers.height
-import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.layout.Layout
-import com.varabyte.kobweb.core.rememberPageContext
-import com.varabyte.kobweb.silk.components.navigation.Link
-import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.css.vh
-import org.jetbrains.compose.web.dom.Text
-import xyz.malefic.home.styles.ActiveNavItemStyle
-import xyz.malefic.home.styles.InactiveNavItemStyle
-import xyz.malefic.home.styles.NavBarStyle
-import xyz.malefic.home.util.TopLevelPages
+import xyz.malefic.home.components.sections.Footer
+import xyz.malefic.home.components.sections.SideNavBar
+import xyz.malefic.home.components.sections.TopNavBar
+import xyz.malefic.home.styles.AppColors
+
+val MainContentStyle =
+    CssStyle {
+        base {
+            Modifier
+                .fillMaxSize()
+                .padding(top = 48.px, bottom = 32.px)
+                .background(AppColors.static.background.variable)
+        }
+        Breakpoint.LG {
+            Modifier.margin(left = 256.px)
+        }
+    }
 
 @Layout
 @Composable
 fun NavBarLayout(content: @Composable () -> Unit) {
-    val ctx = rememberPageContext()
-    val currentRoute = ctx.route.path
+    Box(Modifier.fillMaxSize()) {
+        TopNavBar()
+        SideNavBar()
 
-    Column(Modifier.fillMaxWidth().height(100.vh)) {
-        Box(
-            NavBarStyle.toModifier(),
-            Alignment.Center,
-        ) {
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .maxWidth(1200.px)
-                    .padding(0.px, 20.px),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Box(Modifier.flexGrow(1)) {
-                    SpanText("Malefic Portfolio")
-                }
-
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    TopLevelPages.entries.forEach { page ->
-                        val isActive = page.isCurrentPage(currentRoute)
-
-                        Link(
-                            page.route,
-                            if (isActive) {
-                                ActiveNavItemStyle.toModifier()
-                            } else {
-                                InactiveNavItemStyle.toModifier()
-                            },
-                        ) {
-                            Text(page.value)
-                        }
-                    }
-                }
+        Column(MainContentStyle.toModifier()) {
+            Box(Modifier.fillMaxSize().padding(24.px)) {
+                content()
             }
         }
 
-        Box(Modifier.fillMaxSize()) {
-            content()
-        }
+        Footer()
     }
 }
