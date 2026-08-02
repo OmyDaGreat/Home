@@ -11,8 +11,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.gap
-import com.varabyte.kobweb.compose.ui.modifiers.gridColumn
-import com.varabyte.kobweb.compose.ui.modifiers.gridRow
 import com.varabyte.kobweb.compose.ui.modifiers.opacity
 import com.varabyte.kobweb.compose.ui.modifiers.overflow
 import com.varabyte.kobweb.compose.ui.modifiers.padding
@@ -20,7 +18,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
-import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.CSSColorValue
 import org.jetbrains.compose.web.css.px
@@ -29,22 +26,40 @@ import xyz.malefic.home.styles.AppTypography
 import xyz.malefic.home.util.ModuleSize
 
 val JournalSmallSpanStyle =
-    CssStyle {
-        base { Modifier.gridColumn("span 1") }
-        Breakpoint.LG { Modifier.gridColumn("span 3").gridRow("span 2") }
-    }
+    SpanStyle(
+        baseCol = 1,
+        baseRow = 2,
+        smCol = 1,
+        smRow = 2,
+        mdCol = 2,
+        mdRow = 2,
+        lgCol = 3,
+        lgRow = 2,
+    )
 
 val JournalMediumSpanStyle =
-    CssStyle {
-        base { Modifier.gridColumn("span 1") }
-        Breakpoint.LG { Modifier.gridColumn("span 6").gridRow("span 2") }
-    }
+    SpanStyle(
+        baseCol = 1,
+        baseRow = 2,
+        smCol = 2,
+        smRow = 2,
+        mdCol = 4,
+        mdRow = 2,
+        lgCol = 6,
+        lgRow = 2,
+    )
 
 val JournalLargeSpanStyle =
-    CssStyle {
-        base { Modifier.gridColumn("span 1") }
-        Breakpoint.LG { Modifier.gridColumn("span 6").gridRow("span 3") }
-    }
+    SpanStyle(
+        baseCol = 1,
+        baseRow = 1,
+        smCol = 2,
+        smRow = 1,
+        mdCol = 4,
+        mdRow = 1,
+        lgCol = 6,
+        lgRow = 1,
+    )
 
 val JournalLogStyle =
     CssStyle.base {

@@ -5,6 +5,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.gap
+import com.varabyte.kobweb.compose.ui.modifiers.gridAutoRows
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
@@ -17,14 +18,40 @@ import xyz.malefic.home.components.widgets.SpanStyle
 import xyz.malefic.home.components.widgets.TerminalTile
 import xyz.malefic.home.styles.AppTypography
 
-val AboutTallSpanStyle = SpanStyle(4, 4)
+val AboutTallSpanStyle =
+    SpanStyle(
+        baseCol = 1,
+        baseRow = 4,
+        smCol = 2,
+        smRow = 4,
+        mdCol = 4,
+        mdRow = 4,
+        lgCol = 4,
+        lgRow = 4,
+    )
 
-val AboutSmallSpanStyle = SpanStyle(2, 2)
+val AboutSmallSpanStyle =
+    SpanStyle(
+        baseCol = 1,
+        baseRow = 2,
+        smCol = 1,
+        smRow = 2,
+        mdCol = 2,
+        mdRow = 2,
+        lgCol = 2,
+        lgRow = 2,
+    )
 
 @Page
 @Composable
 fun AboutPage() =
-    SimpleGrid(numColumns(base = 1, lg = 6), Modifier.fillMaxSize().gap(16.px)) {
+    SimpleGrid(
+        numColumns(base = 1, sm = 2, md = 4, lg = 6),
+        Modifier
+            .fillMaxSize()
+            .gap(16.px)
+            .gridAutoRows { size(120.px) },
+    ) {
         TerminalTile(
             title = "~/about.sh",
             modifier = AboutTallSpanStyle.toModifier(),

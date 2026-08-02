@@ -14,11 +14,14 @@ import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.gridColumn
+import com.varabyte.kobweb.compose.ui.modifiers.gridRow
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.LineStyle
@@ -27,16 +30,53 @@ import org.jetbrains.compose.web.css.s
 import xyz.malefic.home.styles.AppColors
 import xyz.malefic.home.styles.AppTypography
 
-val TerminalTileStyle =
-    CssStyle.base {
+@Suppress("ktlint:standard:function-naming", "FunctionName")
+fun SpanStyle(
+    baseCol: Int = 1,
+    baseRow: Int = 1,
+    smCol: Int? = null,
+    smRow: Int? = null,
+    mdCol: Int? = null,
+    mdRow: Int? = null,
+    lgCol: Int? = null,
+    lgRow: Int? = null,
+) = CssStyle {
+    base {
         Modifier
-            .border(1.px, LineStyle.Solid, AppColors.static.outline.variable)
-            .background(AppColors.static.surface.variable)
-            .transition(Transition.of("border-color", 0.1.s))
+            .gridColumn("span $baseCol")
+            .gridRow("span $baseRow")
     }
+    smCol?.let { col ->
+        Breakpoint.SM {
+            Modifier
+                .gridColumn("span $col")
+                .gridRow("span ${smRow ?: baseRow}")
+        }
+    }
+    mdCol?.let { col ->
+        Breakpoint.MD {
+            Modifier
+                .gridColumn("span $col")
+                .gridRow("span ${mdRow ?: smRow ?: baseRow}")
+        }
+    }
+    lgCol?.let { col ->
+        Breakpoint.LG {
+            Modifier
+                .gridColumn("span $col")
+                .gridRow("span ${lgRow ?: mdRow ?: smRow ?: baseRow}")
+        }
+    }
+}
 
-val TerminalTileHoverStyle =
+val TerminalTileStyle =
     CssStyle {
+        base {
+            Modifier
+                .border(1.px, LineStyle.Solid, AppColors.static.outline.variable)
+                .background(AppColors.static.surface.variable)
+                .transition(Transition.of("border-color", 0.1.s))
+        }
         hover {
             Modifier.border(1.px, LineStyle.Solid, AppColors.static.signalViolet.variable)
         }
@@ -51,16 +91,6 @@ val TerminalHeaderStyle =
             .transition(Transition.of("border-bottom-color", 0.1.s))
     }
 
-val TerminalHeaderTitleStyle =
-    CssStyle.base {
-        AppTypography.labelCaps.color(AppColors.static.onSurfaceVariant.variable)
-    }
-
-val TerminalHeaderStatusStyle =
-    CssStyle.base {
-        AppTypography.labelCaps
-    }
-
 @Composable
 fun TerminalTile(
     modifier: Modifier = Modifier,
@@ -69,24 +99,18 @@ fun TerminalTile(
     statusModifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    Column(
-        TerminalTileStyle
-            .toModifier()
-            .then(TerminalTileHoverStyle.toModifier())
-            .fillMaxHeight()
-            .then(modifier),
-    ) {
+    Column(TerminalTileStyle.toModifier().fillMaxHeight().then(modifier)) {
         if (title != null || status != null) {
             Row(
                 TerminalHeaderStyle.toModifier(),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 if (title != null) {
-                    SpanText(title, TerminalHeaderTitleStyle.toModifier())
+                    SpanText(title, AppTypography.labelCaps.color(AppColors.static.onSurfaceVariant.current))
                 }
                 Box(Modifier.weight(1f))
                 if (status != null) {
-                    SpanText(status, TerminalHeaderStatusStyle.toModifier().then(statusModifier))
+                    SpanText(status, AppTypography.labelCaps.then(statusModifier))
                 }
             }
         }

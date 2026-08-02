@@ -10,6 +10,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.gap
+import com.varabyte.kobweb.compose.ui.modifiers.gridAutoRows
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.Page
@@ -33,7 +34,17 @@ import xyz.malefic.home.util.ModuleSize
 
 var isBooting by mutableStateOf(true)
 
-val HeroLargeSpanStyle = SpanStyle(6, 2)
+val HeroSpanStyle =
+    SpanStyle(
+        baseCol = 1,
+        baseRow = 2,
+        smCol = 2,
+        smRow = 3,
+        mdCol = 4,
+        mdRow = 2,
+        lgCol = 6,
+        lgRow = 1,
+    )
 
 @Page
 @Layout(".components.layouts.NoLayout")
@@ -43,9 +54,15 @@ fun HomePage() {
         BootSequence { isBooting = false }
     } else {
         MainLayout {
-            SimpleGrid(numColumns(base = 1, lg = 6), Modifier.fillMaxSize().gap(16.px)) {
+            SimpleGrid(
+                numColumns(base = 1, sm = 2, md = 4, lg = 6),
+                Modifier
+                    .fillMaxSize()
+                    .gap(16.px)
+                    .gridAutoRows { size(240.px) },
+            ) {
                 TerminalTile(
-                    HeroLargeSpanStyle.toModifier(),
+                    HeroSpanStyle.toModifier(),
                     "~/README.md",
                     "[ READ_ONLY ]",
                     Modifier.color(AppColors.static.signalViolet.current),
@@ -64,7 +81,7 @@ fun HomePage() {
 
                 SkillModule(
                     "~/code/dialect",
-                    listOf("KOTLIN" to 95, "JAVA" to 80, "JAVASCRIPT" to 30),
+                    listOf("KOTLIN" to 95, "JAVA" to 80, "PYTHON" to 60, "JAVASCRIPT" to 60),
                     size = ModuleSize.SMALL,
                 )
 
@@ -85,8 +102,8 @@ fun HomePage() {
 
                 EnvironmentModule(
                     "/sys/env",
-                    listOf("LINUX", "WINDOWS", "MAC", "IOS", "ANDROID", "WEB"),
-                    size = ModuleSize.MEDIUM,
+                    listOf("LINUX", "WINDOWS", "MAC", "MOBILE", "WEB"),
+                    size = ModuleSize.SMALL,
                 )
 
                 SystemJournal(

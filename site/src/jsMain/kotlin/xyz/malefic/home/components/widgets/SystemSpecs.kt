@@ -2,8 +2,10 @@ package xyz.malefic.home.components.widgets
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.border
@@ -11,8 +13,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
-import com.varabyte.kobweb.compose.ui.modifiers.gridColumn
-import com.varabyte.kobweb.compose.ui.modifiers.gridRow
 import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
@@ -24,35 +24,86 @@ import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
-import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import xyz.malefic.home.styles.AppColors
+import xyz.malefic.home.styles.AppSpacing
 import xyz.malefic.home.styles.AppTypography
 import xyz.malefic.home.util.ModuleSize
 
-@Suppress("ktlint:standard:function-naming", "FunctionName")
-fun SpanStyle(
-    col: Int,
-    row: Int,
-) = CssStyle {
-    base { Modifier.gridColumn("span 1") }
-    Breakpoint.LG { Modifier.gridColumn("span $col").gridRow("span $row") }
-}
+val SkillSmallSpanStyle =
+    SpanStyle(
+        baseCol = 1,
+        baseRow = 1,
+        smCol = 1,
+        smRow = 1,
+        mdCol = 2,
+        mdRow = 1,
+        lgCol = 2,
+        lgRow = 1,
+    )
 
-val SkillSmallSpanStyle = SpanStyle(1, 1)
+val SkillMediumSpanStyle =
+    SpanStyle(
+        baseCol = 1,
+        baseRow = 2,
+        smCol = 2,
+        smRow = 2,
+        mdCol = 3,
+        mdRow = 2,
+        lgCol = 4,
+        lgRow = 2,
+    )
 
-val SkillMediumSpanStyle = SpanStyle(4, 2)
+val SkillLargeSpanStyle =
+    SpanStyle(
+        baseCol = 1,
+        baseRow = 3,
+        smCol = 2,
+        smRow = 3,
+        mdCol = 4,
+        mdRow = 2,
+        lgCol = 6,
+        lgRow = 2,
+    )
 
-val SkillLargeSpanStyle = SpanStyle(6, 2)
+val EnvSmallSpanStyle =
+    SpanStyle(
+        baseCol = 1,
+        baseRow = 1,
+        smCol = 1,
+        smRow = 1,
+        mdCol = 2,
+        mdRow = 1,
+        lgCol = 2,
+        lgRow = 1,
+    )
 
-val EnvSmallSpanStyle = SpanStyle(2, 1)
+val EnvMediumSpanStyle =
+    SpanStyle(
+        baseCol = 1,
+        baseRow = 2,
+        smCol = 2,
+        smRow = 2,
+        mdCol = 2,
+        mdRow = 1,
+        lgCol = 3,
+        lgRow = 1,
+    )
 
-val EnvMediumSpanStyle = SpanStyle(3, 1)
-
-val EnvLargeSpanStyle = SpanStyle(3, 2)
+val EnvLargeSpanStyle =
+    SpanStyle(
+        baseCol = 1,
+        baseRow = 3,
+        smCol = 2,
+        smRow = 3,
+        mdCol = 4,
+        mdRow = 2,
+        lgCol = 3,
+        lgRow = 2,
+    )
 
 val SkillBarContainerStyle =
     CssStyle.base {
@@ -85,7 +136,7 @@ fun SkillModule(
         }
 
     TerminalTile(title = title, modifier = spanModifier.then(modifier)) {
-        Column(Modifier.padding(16.px).gap(12.px).fillMaxSize()) {
+        Column(Modifier.padding(AppSpacing.gapOuter).gap(AppSpacing.gapInner).fillMaxSize(), Arrangement.Center) {
             skills.forEach { (name, progress) ->
                 Column(Modifier.fillMaxWidth()) {
                     SpanText(name, AppTypography.codeSm)
@@ -120,9 +171,9 @@ fun EnvironmentModule(
 
     val internalColumns =
         when (size) {
-            ModuleSize.SMALL -> numColumns(1)
-            ModuleSize.MEDIUM -> numColumns(2)
-            ModuleSize.LARGE -> numColumns(3)
+            ModuleSize.SMALL -> numColumns(base = 1)
+            ModuleSize.MEDIUM -> numColumns(base = 2)
+            ModuleSize.LARGE -> numColumns(base = 3)
         }
 
     TerminalTile(title = title, modifier = spanModifier.then(modifier)) {
@@ -131,7 +182,7 @@ fun EnvironmentModule(
             Modifier.padding(16.px).gap(8.px).fillMaxSize(),
         ) {
             items.forEach { item ->
-                Box(EnvironmentItemStyle.toModifier()) {
+                Box(EnvironmentItemStyle.toModifier(), contentAlignment = Alignment.Center) {
                     SpanText(item, AppTypography.codeSm.fillMaxWidth())
                 }
             }
