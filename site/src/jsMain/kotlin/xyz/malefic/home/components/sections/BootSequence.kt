@@ -24,7 +24,6 @@ import kotlin.js.Date
 import kotlin.random.Random
 import kotlin.random.nextInt
 import kotlin.time.Duration.Companion.seconds
-import kotlin.time.Instant
 import kotlin.time.toKotlinInstant
 
 val BootSequenceStyle =
@@ -41,7 +40,7 @@ fun BootSequence(onFinished: () -> Unit = {}) {
                 "Kernel: Linux ${Random.nextInt(0..9)}.${Random.nextInt(0..9)}.${Random.nextInt(0..9)}-malefic-x86_64",
                 "Shell: Kotlin 2.1.0",
                 "WM: Dank Material Shell on Niri",
-                "Uptime: ${Date().toKotlinInstant() - Instant.fromEpochMilliseconds(Date.UTC(2026, 7, 1, 18, 15).toLong())}",
+                "Uptime: ${Date().toKotlinInstant() - START_TIME}",
                 "----------------------------------",
                 "Boot sequence complete.",
                 "Loading user environment: root",

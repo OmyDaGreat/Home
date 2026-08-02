@@ -31,9 +31,11 @@ import org.jetbrains.compose.web.css.px
 import xyz.malefic.home.styles.AppColors
 import xyz.malefic.home.styles.AppTypography
 import kotlin.js.Date
-import kotlin.time.Duration.Companion.seconds
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Instant
 import kotlin.time.toKotlinInstant
+
+val START_TIME = Instant.fromEpochMilliseconds(Date.UTC(2026, 7, 1, 18, 15).toLong())
 
 val FooterContainerStyle =
     CssStyle.base {
@@ -50,22 +52,18 @@ val FooterContainerStyle =
 
 @Composable
 fun Footer() {
-    var timeStr by remember { mutableStateOf("") }
-    var uptime by remember {
-        mutableStateOf(
-            Date().toKotlinInstant() - Instant.fromEpochMilliseconds(Date.UTC(2026, 7, 1, 18, 15).toLong()),
-        )
-    }
+    val initialDate = remember { Date() }
+    var timeStr by remember { mutableStateOf(initialDate.toISOString().substring(11, 19)) }
+    var uptime by remember { mutableStateOf(initialDate.toKotlinInstant() - START_TIME) }
 
     LaunchedEffect(Unit) {
         while (true) {
             val now = Date()
-            val h = now.getUTCHours().toString().padStart(2, '0')
-            val m = now.getUTCMinutes().toString().padStart(2, '0')
-            val s = now.getUTCSeconds().toString().padStart(2, '0')
-            timeStr = "$h:$m:$s"
-            uptime = now.toKotlinInstant() - Instant.fromEpochMilliseconds(Date.UTC(2026, 7, 1, 18, 15).toLong())
-            delay(1.seconds)
+            timeStr = now.toISOString().substring(11, 19)
+            uptime = now.toKotlinInstant() - START_TIME
+
+            val msToNextSecond = 1000 - (now.getTime() % 1000).toLong()
+            delay(msToNextSecond.milliseconds)
         }
     }
 
