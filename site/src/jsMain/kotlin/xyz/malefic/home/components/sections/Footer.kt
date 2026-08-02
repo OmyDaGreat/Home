@@ -12,21 +12,17 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.borderTop
-import com.varabyte.kobweb.compose.ui.modifiers.bottom
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.ui.modifiers.position
-import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.toModifier
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.css.LineStyle
-import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.px
 import xyz.malefic.home.styles.AppColors
 import xyz.malefic.home.styles.AppTypography
@@ -45,9 +41,6 @@ val FooterContainerStyle =
             .background(AppColors.static.surfaceContainerHigh.variable)
             .borderTop(1.px, LineStyle.Solid, AppColors.static.outline.variable)
             .padding(leftRight = 24.px)
-            .position(Position.Fixed)
-            .bottom(0.px)
-            .zIndex(50)
     }
 
 @Composable
@@ -69,8 +62,8 @@ fun Footer() {
 
     Row(
         FooterContainerStyle.toModifier(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
+        Arrangement.SpaceBetween,
+        Alignment.CenterVertically,
     ) {
         SpanText("[ SYSTEM READY ]", AppTypography.codeSm.color(AppColors.static.tertiary.current))
 
@@ -80,6 +73,6 @@ fun Footer() {
             SpanText("UTC: $timeStr", AppTypography.codeSm.color(AppColors.static.onSurfaceVariant.current))
         }
 
-        SpanText("● ONLINE", AppTypography.codeSm.color(AppColors.static.execGreen.current))
+        SpanText("● ONLINE", AppTypography.codeSm.color(AppColors.static.secondary.current))
     }
 }

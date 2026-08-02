@@ -18,10 +18,10 @@ import com.varabyte.kobweb.compose.ui.modifiers.borderTop
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.display
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
-import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.opacity
 import com.varabyte.kobweb.compose.ui.modifiers.padding
@@ -42,7 +42,6 @@ import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.s
-import org.jetbrains.compose.web.css.vh
 import xyz.malefic.home.styles.AppColors
 import xyz.malefic.home.styles.AppTypography
 
@@ -52,7 +51,7 @@ val SideNavContainerStyle =
             Modifier
                 .display(DisplayStyle.None)
                 .width(256.px)
-                .height(100.vh)
+                .fillMaxHeight()
                 .background(AppColors.static.surfaceContainerLowest.variable)
                 .borderRight(1.px, LineStyle.Solid, AppColors.static.outline.variable)
         }
@@ -68,7 +67,7 @@ val SideNavItemStyle =
                 .fillMaxWidth()
                 .padding(topBottom = 8.px, leftRight = 16.px)
                 .color(AppColors.static.onSecondary.variable)
-                .transition(Transition.of("background-color", 0.1.s))
+                .transition(Transition.of("background-color", 0.2.s))
                 .cursor(Pointer)
         }
         hover {
@@ -123,7 +122,7 @@ fun SideNavBar() =
             SpanText("branch: master", AppTypography.codeSm.opacity(0.5))
         }
 
-        Column(Modifier.padding(topBottom = 16.px).weight(1f)) {
+        Column(Modifier.padding(topBottom = 16.px).weight(1f).fillMaxWidth()) {
             SideNavItem("[1 main]", true) { FaCode(it) }
             SideNavItem("[2 source]") { FaCode(it) }
             SideNavItem("[3 logs]") { FaTerminal(it) }
@@ -135,7 +134,7 @@ fun SideNavBar() =
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(StatusDotStyle.toModifier())
-            SpanText(" SYSTEM ONLINE", StatusTextStyle.toModifier())
+            SpanText(" SYSTEMS OPERATIONAL", StatusTextStyle.toModifier())
         }
     }
 

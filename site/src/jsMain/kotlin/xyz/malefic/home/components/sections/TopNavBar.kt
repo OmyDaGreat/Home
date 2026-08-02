@@ -20,12 +20,9 @@ import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.ui.modifiers.position
 import com.varabyte.kobweb.compose.ui.modifiers.textDecorationLine
-import com.varabyte.kobweb.compose.ui.modifiers.top
 import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.compose.ui.modifiers.whiteSpace
-import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.icons.fa.FaEthernet
 import com.varabyte.kobweb.silk.components.icons.fa.FaPowerOff
@@ -39,7 +36,6 @@ import com.varabyte.kobweb.silk.style.extendedByBase
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.LineStyle
-import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.s
@@ -85,9 +81,6 @@ val TopNavContainerStyle =
             .background(AppColors.static.surface.variable)
             .borderBottom(1.px, LineStyle.Solid, AppColors.static.outline.variable)
             .padding(leftRight = 24.px)
-            .position(Position.Fixed)
-            .top(0.px)
-            .zIndex(50)
     }
 
 val BrandStyle =
