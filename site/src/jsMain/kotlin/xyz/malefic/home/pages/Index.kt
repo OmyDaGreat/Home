@@ -17,12 +17,14 @@ import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.px
-import xyz.malefic.home.components.layouts.NavBarLayout
+import xyz.malefic.home.components.layouts.MainLayout
 import xyz.malefic.home.components.sections.BootSequence
 import xyz.malefic.home.components.widgets.EnvironmentModule
 import xyz.malefic.home.components.widgets.LogEntry
 import xyz.malefic.home.components.widgets.SkillModule
+import xyz.malefic.home.components.widgets.SpanStyle
 import xyz.malefic.home.components.widgets.SystemJournal
 import xyz.malefic.home.components.widgets.TerminalTile
 import xyz.malefic.home.styles.AppColors
@@ -30,6 +32,8 @@ import xyz.malefic.home.styles.AppTypography
 import xyz.malefic.home.util.ModuleSize
 
 var isBooting by mutableStateOf(true)
+
+val HeroLargeSpanStyle = SpanStyle(6, 2)
 
 @Page
 @Layout(".components.layouts.NoLayout")
@@ -41,10 +45,10 @@ fun HomePage() {
         MainLayout {
             SimpleGrid(numColumns(base = 1, lg = 6), Modifier.fillMaxSize().gap(16.px)) {
                 TerminalTile(
-                    title = "~/README.md",
-                    status = "[ READ_ONLY ]",
-                    statusModifier = Modifier.color(AppColors.static.signalViolet.current),
-                    size = ModuleSize.LARGE,
+                    HeroLargeSpanStyle.toModifier(),
+                    "~/README.md",
+                    "[ READ_ONLY ]",
+                    Modifier.color(AppColors.static.signalViolet.current),
                 ) {
                     Column(
                         Modifier.padding(24.px).fillMaxSize(),
@@ -82,7 +86,7 @@ fun HomePage() {
                 EnvironmentModule(
                     "/sys/env",
                     listOf("LINUX", "WINDOWS", "MAC", "IOS", "ANDROID", "WEB"),
-                    size = ModuleSize.SMALL,
+                    size = ModuleSize.MEDIUM,
                 )
 
                 SystemJournal(

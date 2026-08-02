@@ -11,6 +11,8 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
+import com.varabyte.kobweb.compose.ui.modifiers.gridColumn
+import com.varabyte.kobweb.compose.ui.modifiers.gridRow
 import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
@@ -22,6 +24,7 @@ import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.percent
@@ -29,6 +32,27 @@ import org.jetbrains.compose.web.css.px
 import xyz.malefic.home.styles.AppColors
 import xyz.malefic.home.styles.AppTypography
 import xyz.malefic.home.util.ModuleSize
+
+@Suppress("ktlint:standard:function-naming", "FunctionName")
+fun SpanStyle(
+    col: Int,
+    row: Int,
+) = CssStyle {
+    base { Modifier.gridColumn("span 1") }
+    Breakpoint.LG { Modifier.gridColumn("span $col").gridRow("span $row") }
+}
+
+val SkillSmallSpanStyle = SpanStyle(1, 1)
+
+val SkillMediumSpanStyle = SpanStyle(4, 2)
+
+val SkillLargeSpanStyle = SpanStyle(6, 2)
+
+val EnvSmallSpanStyle = SpanStyle(2, 1)
+
+val EnvMediumSpanStyle = SpanStyle(3, 1)
+
+val EnvLargeSpanStyle = SpanStyle(3, 2)
 
 val SkillBarContainerStyle =
     CssStyle.base {
@@ -53,7 +77,14 @@ fun SkillModule(
     modifier: Modifier = Modifier,
     size: ModuleSize = ModuleSize.MEDIUM,
 ) {
-    TerminalTile(title = title, size = size, modifier = modifier) {
+    val spanModifier =
+        when (size) {
+            ModuleSize.SMALL -> SkillSmallSpanStyle.toModifier()
+            ModuleSize.MEDIUM -> SkillMediumSpanStyle.toModifier()
+            ModuleSize.LARGE -> SkillLargeSpanStyle.toModifier()
+        }
+
+    TerminalTile(title = title, modifier = spanModifier.then(modifier)) {
         Column(Modifier.padding(16.px).gap(12.px).fillMaxSize()) {
             skills.forEach { (name, progress) ->
                 Column(Modifier.fillMaxWidth()) {
@@ -80,15 +111,21 @@ fun EnvironmentModule(
     modifier: Modifier = Modifier,
     size: ModuleSize = ModuleSize.MEDIUM,
 ) {
+    val spanModifier =
+        when (size) {
+            ModuleSize.SMALL -> EnvSmallSpanStyle.toModifier()
+            ModuleSize.MEDIUM -> EnvMediumSpanStyle.toModifier()
+            ModuleSize.LARGE -> EnvLargeSpanStyle.toModifier()
+        }
+
     val internalColumns =
         when (size) {
             ModuleSize.SMALL -> numColumns(1)
             ModuleSize.MEDIUM -> numColumns(2)
             ModuleSize.LARGE -> numColumns(3)
-            else -> numColumns(2)
         }
 
-    TerminalTile(modifier, title, size = size) {
+    TerminalTile(title = title, modifier = spanModifier.then(modifier)) {
         SimpleGrid(
             internalColumns,
             Modifier.padding(16.px).gap(8.px).fillMaxSize(),
