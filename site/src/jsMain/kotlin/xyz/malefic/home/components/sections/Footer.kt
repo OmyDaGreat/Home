@@ -14,8 +14,10 @@ import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.borderTop
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.flexShrink
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.height
+import com.varabyte.kobweb.compose.ui.modifiers.minHeight
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
@@ -38,9 +40,11 @@ val FooterContainerStyle =
         Modifier
             .fillMaxWidth()
             .height(32.px)
+            .minHeight(32.px)
             .background(AppColors.static.surfaceContainerHigh.variable)
             .borderTop(1.px, LineStyle.Solid, AppColors.static.outline.variable)
             .padding(leftRight = 24.px)
+            .flexShrink(0)
     }
 
 @Composable

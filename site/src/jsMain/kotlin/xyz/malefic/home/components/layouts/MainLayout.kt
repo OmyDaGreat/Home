@@ -16,15 +16,15 @@ import com.varabyte.kobweb.core.layout.Layout
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.vh
 import xyz.malefic.home.components.sections.Footer
+import xyz.malefic.home.components.sections.Header
 import xyz.malefic.home.components.sections.SideNavBar
-import xyz.malefic.home.components.sections.TopNavBar
 import xyz.malefic.home.styles.AppColors
 
 @Layout
 @Composable
 fun MainLayout(content: @Composable () -> Unit) {
     Column(Modifier.height(100.vh).fillMaxWidth().overflow(Overflow.Hidden)) {
-        TopNavBar()
+        Header()
 
         Row(
             Modifier

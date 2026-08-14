@@ -13,12 +13,14 @@ import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.borderBottom
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.flexShrink
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
 import com.varabyte.kobweb.compose.ui.modifiers.margin
+import com.varabyte.kobweb.compose.ui.modifiers.minHeight
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.textDecorationLine
 import com.varabyte.kobweb.compose.ui.modifiers.transition
@@ -73,14 +75,16 @@ val ActiveNavItemStyle =
             .fontWeight(600)
     }
 
-val TopNavContainerStyle =
+val HeaderContainerStyle =
     CssStyle.base {
         Modifier
             .fillMaxWidth()
             .height(48.px)
+            .minHeight(48.px)
             .background(AppColors.static.surface.variable)
             .borderBottom(1.px, LineStyle.Solid, AppColors.static.outline.variable)
             .padding(leftRight = 24.px)
+            .flexShrink(0)
     }
 
 val BrandStyle =
@@ -91,18 +95,18 @@ val BrandStyle =
             .letterSpacing((-0.05).em)
     }
 
-val TopNavIconStyle =
+val HeaderIconStyle =
     CssStyle.base {
         Modifier.color(AppColors.static.primary.variable).fontSize(20.px)
     }
 
 @Composable
-fun TopNavBar() {
+fun Header() {
     val ctx = rememberPageContext()
     val currentRoute = ctx.route.path
 
     Row(
-        TopNavContainerStyle.toModifier(),
+        HeaderContainerStyle.toModifier(),
         Arrangement.SpaceBetween,
         Alignment.CenterVertically,
     ) {
@@ -133,9 +137,9 @@ fun TopNavBar() {
             Modifier.gap(16.px),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            FaTerminal(TopNavIconStyle.toModifier())
-            FaEthernet(TopNavIconStyle.toModifier())
-            FaPowerOff(TopNavIconStyle.toModifier())
+            FaTerminal(HeaderIconStyle.toModifier())
+            FaEthernet(HeaderIconStyle.toModifier())
+            FaPowerOff(HeaderIconStyle.toModifier())
         }
     }
 }
