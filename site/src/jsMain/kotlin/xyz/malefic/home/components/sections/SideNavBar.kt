@@ -20,9 +20,11 @@ import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.display
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.flexShrink
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.margin
+import com.varabyte.kobweb.compose.ui.modifiers.minWidth
 import com.varabyte.kobweb.compose.ui.modifiers.opacity
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.size
@@ -51,6 +53,8 @@ val SideNavContainerStyle =
             Modifier
                 .display(DisplayStyle.None)
                 .width(256.px)
+                .minWidth(256.px)
+                .flexShrink(0)
                 .fillMaxHeight()
                 .background(AppColors.static.surfaceContainerLowest.variable)
                 .borderRight(1.px, LineStyle.Solid, AppColors.static.outline.variable)

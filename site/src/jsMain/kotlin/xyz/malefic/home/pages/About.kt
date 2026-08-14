@@ -3,7 +3,7 @@ package xyz.malefic.home.pages
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.gridAutoRows
 import com.varabyte.kobweb.compose.ui.modifiers.padding
@@ -48,7 +48,7 @@ fun AboutPage() =
     SimpleGrid(
         numColumns(base = 1, sm = 2, md = 4, lg = 6),
         Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .gap(16.px)
             .gridAutoRows { size(120.px) },
     ) {

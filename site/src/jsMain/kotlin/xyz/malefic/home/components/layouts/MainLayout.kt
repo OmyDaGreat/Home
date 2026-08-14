@@ -39,10 +39,11 @@ fun MainLayout(content: @Composable () -> Unit) {
                 Modifier
                     .fillMaxHeight()
                     .weight(1f)
-                    .padding(24.px)
                     .overflow(Overflow.Auto),
             ) {
-                content()
+                Box(Modifier.fillMaxWidth().padding(24.px)) {
+                    content()
+                }
             }
         }
 
