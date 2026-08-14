@@ -11,4 +11,4 @@ server:
       script: "build/kotlin-webpack/js/productionExecutable/home.js"
       siteRoot: ".kobweb/site"
 
-  port: 8080
+  port: 8000
