@@ -7,7 +7,7 @@ kutint = "2.1.0"
 [libraries]
 compose-html-core = { module = "org.jetbrains.compose.html:html-core", version.ref = "jetbrains-compose" }
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "jetbrains-compose" }
-kobweb-core = { module = "com.varabyte.kobweb:kobweb-core ", version.ref = "kobweb" }
+kobweb-core = { module = "com.varabyte.kobweb:kobweb-core", version.ref = "kobweb" }
 kobweb-silk = { module = "com.varabyte.kobweb:kobweb-silk", version.ref = "kobweb" }
 kobwebx-serialization-kotlinx = { module = "com.varabyte.kobwebx:kobwebx-serialization-kotlinx", version.ref = "kobweb" }
 silk-foundation = { module = "com.varabyte.kobweb:silk-foundation", version.ref = "kobweb" }
