@@ -20,10 +20,10 @@ import xyz.malefic.home.styles.AppTypography
 
 val AboutTallSpanStyle =
     SpanStyle(
-        4 to 2,
-        4 to 4,
-        4 to 8,
-        4 to 8,
+        2 to 2,
+        2 to 4,
+        2 to 8,
+        2 to 8,
     )
 
 val AboutSmallSpanStyle =
@@ -65,6 +65,7 @@ fun AboutPage() =
             Column(Modifier.padding(16.px).gap(8.px)) {
                 SpanText("DISCORD: ._malefic_.", AppTypography.codeSm)
                 Link("https://github.com/OmyDaGreat", "GITHUB: @OmyDaGreat", AppTypography.codeSm)
+                Link("https://linkedin.malefic.xyz", "LINKEDIN: Om Gupta", AppTypography.codeSm)
             }
         }
     }
