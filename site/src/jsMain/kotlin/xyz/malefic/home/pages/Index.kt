@@ -37,14 +37,10 @@ var isBooting by mutableStateOf(true)
 
 val HeroSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 2,
-        smCol = 2,
-        smRow = 3,
-        mdCol = 4,
-        mdRow = 2,
-        lgCol = 6,
-        lgRow = 1,
+        2 to 2,
+        3 to 4,
+        2 to 8,
+        1 to 12,
     )
 
 @Page
@@ -56,7 +52,7 @@ fun HomePage() {
     } else {
         MainLayout {
             SimpleGrid(
-                numColumns(base = 1, sm = 2, md = 4, lg = 6),
+                numColumns(base = 1, sm = 4, md = 8, lg = 12),
                 Modifier
                     .fillMaxWidth()
                     .gap(16.px)

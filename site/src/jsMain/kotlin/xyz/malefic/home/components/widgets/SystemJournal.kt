@@ -27,38 +27,26 @@ import xyz.malefic.home.util.ModuleSize
 
 val JournalSmallSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 2,
-        smCol = 1,
-        smRow = 2,
-        mdCol = 2,
-        mdRow = 2,
-        lgCol = 3,
-        lgRow = 2,
+        2 to 2,
+        2 to 2,
+        2 to 4,
+        1 to 6,
     )
 
 val JournalMediumSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 2,
-        smCol = 2,
-        smRow = 2,
-        mdCol = 4,
-        mdRow = 2,
-        lgCol = 6,
-        lgRow = 2,
+        2 to 2,
+        2 to 4,
+        1 to 8,
+        1 to 12,
     )
 
 val JournalLargeSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 1,
-        smCol = 2,
-        smRow = 1,
-        mdCol = 4,
-        mdRow = 1,
-        lgCol = 6,
-        lgRow = 1,
+        2 to 2,
+        2 to 4,
+        1 to 8,
+        1 to 12,
     )
 
 val JournalLogStyle =

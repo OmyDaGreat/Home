@@ -19,21 +19,17 @@ import xyz.malefic.home.styles.AppTypography
 
 val WorkLargeSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 3,
-        smCol = 2,
-        smRow = 3,
-        mdCol = 4,
-        mdRow = 3,
-        lgCol = 6,
-        lgRow = 3,
+        3 to 2,
+        3 to 4,
+        3 to 8,
+        3 to 12,
     )
 
 @Page
 @Composable
 fun WorkPage() {
     SimpleGrid(
-        numColumns(base = 1, sm = 2, md = 4, lg = 6),
+        numColumns(base = 2, sm = 4, md = 8, lg = 12),
         Modifier
             .fillMaxWidth()
             .gap(16.px)

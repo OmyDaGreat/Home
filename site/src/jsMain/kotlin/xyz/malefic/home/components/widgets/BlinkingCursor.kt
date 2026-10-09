@@ -51,6 +51,4 @@ val BlinkingCursorStyle =
     }
 
 @Composable
-fun BlinkingCursor(modifier: Modifier = Modifier) {
-    Span(BlinkingCursorStyle.toModifier().then(modifier).toAttrs())
-}
+fun BlinkingCursor(modifier: Modifier = Modifier) = Span(BlinkingCursorStyle.toModifier().then(modifier).toAttrs())

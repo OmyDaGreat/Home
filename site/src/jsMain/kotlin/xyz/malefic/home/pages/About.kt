@@ -20,33 +20,25 @@ import xyz.malefic.home.styles.AppTypography
 
 val AboutTallSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 4,
-        smCol = 2,
-        smRow = 4,
-        mdCol = 4,
-        mdRow = 4,
-        lgCol = 4,
-        lgRow = 4,
+        4 to 2,
+        4 to 4,
+        4 to 8,
+        4 to 8,
     )
 
 val AboutSmallSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 2,
-        smCol = 1,
-        smRow = 2,
-        mdCol = 2,
-        mdRow = 2,
-        lgCol = 2,
-        lgRow = 2,
+        2 to 2,
+        2 to 2,
+        2 to 4,
+        2 to 4,
     )
 
 @Page
 @Composable
 fun AboutPage() =
     SimpleGrid(
-        numColumns(base = 1, sm = 2, md = 4, lg = 6),
+        numColumns(base = 2, sm = 4, md = 8, lg = 12),
         Modifier
             .fillMaxWidth()
             .gap(16.px)

@@ -30,41 +30,45 @@ import org.jetbrains.compose.web.css.s
 import xyz.malefic.home.styles.AppColors
 import xyz.malefic.home.styles.AppTypography
 
+typealias Row = Int
+typealias Col = Int
+
+val Pair<Row, Col>.row
+    get() = this.first
+val Pair<Row, Col>.col
+    get() = this.second
+
 @Suppress("ktlint:standard:function-naming", "FunctionName")
 fun SpanStyle(
-    baseCol: Int = 1,
-    baseRow: Int = 1,
-    smCol: Int? = null,
-    smRow: Int? = null,
-    mdCol: Int? = null,
-    mdRow: Int? = null,
-    lgCol: Int? = null,
-    lgRow: Int? = null,
+    base: Pair<Row, Col> = 1 to 1,
+    sm: Pair<Row, Col>? = null,
+    md: Pair<Row, Col>? = null,
+    lg: Pair<Row, Col>? = null,
 ) = CssStyle {
     base {
         Modifier
-            .gridColumn("span $baseCol")
-            .gridRow("span $baseRow")
+            .gridColumn("span ${base.col}")
+            .gridRow("span ${base.row}")
     }
-    smCol?.let { col ->
+    sm?.let { size ->
         Breakpoint.SM {
             Modifier
-                .gridColumn("span $col")
-                .gridRow("span ${smRow ?: baseRow}")
+                .gridColumn("span ${size.col}")
+                .gridRow("span ${size.row}")
         }
     }
-    mdCol?.let { col ->
+    md?.let { size ->
         Breakpoint.MD {
             Modifier
-                .gridColumn("span $col")
-                .gridRow("span ${mdRow ?: smRow ?: baseRow}")
+                .gridColumn("span ${size.col}")
+                .gridRow("span ${size.row}")
         }
     }
-    lgCol?.let { col ->
+    lg?.let { size ->
         Breakpoint.LG {
             Modifier
-                .gridColumn("span $col")
-                .gridRow("span ${lgRow ?: mdRow ?: smRow ?: baseRow}")
+                .gridColumn("span ${size.col}")
+                .gridRow("span ${size.row}")
         }
     }
 }

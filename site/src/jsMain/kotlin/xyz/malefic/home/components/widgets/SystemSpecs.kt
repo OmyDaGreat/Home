@@ -35,74 +35,50 @@ import xyz.malefic.home.util.ModuleSize
 
 val SkillSmallSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 1,
-        smCol = 1,
-        smRow = 1,
-        mdCol = 2,
-        mdRow = 1,
-        lgCol = 2,
-        lgRow = 1,
+        1 to 2,
+        1 to 2,
+        1 to 4,
+        1 to 4,
     )
 
 val SkillMediumSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 2,
-        smCol = 2,
-        smRow = 2,
-        mdCol = 3,
-        mdRow = 2,
-        lgCol = 4,
-        lgRow = 2,
+        2 to 2,
+        2 to 4,
+        2 to 6,
+        2 to 8,
     )
 
 val SkillLargeSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 3,
-        smCol = 2,
-        smRow = 3,
-        mdCol = 4,
-        mdRow = 2,
-        lgCol = 6,
-        lgRow = 2,
+        3 to 2,
+        3 to 4,
+        2 to 8,
+        2 to 12,
     )
 
 val EnvSmallSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 1,
-        smCol = 1,
-        smRow = 1,
-        mdCol = 2,
-        mdRow = 1,
-        lgCol = 2,
-        lgRow = 1,
+        1 to 2,
+        1 to 2,
+        1 to 4,
+        1 to 4,
     )
 
 val EnvMediumSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 2,
-        smCol = 2,
-        smRow = 2,
-        mdCol = 2,
-        mdRow = 1,
-        lgCol = 3,
-        lgRow = 1,
+        2 to 2,
+        2 to 2,
+        1 to 4,
+        1 to 4,
     )
 
 val EnvLargeSpanStyle =
     SpanStyle(
-        baseCol = 1,
-        baseRow = 3,
-        smCol = 2,
-        smRow = 3,
-        mdCol = 4,
-        mdRow = 2,
-        lgCol = 3,
-        lgRow = 2,
+        3 to 2,
+        3 to 4,
+        2 to 8,
+        2 to 6,
     )
 
 val SkillBarContainerStyle =
