@@ -82,14 +82,14 @@ fun HomePage() {
 
                 SkillModule(
                     "~/code/dialect",
-                    listOf("KOTLIN" to 95, "JAVA" to 80, "PYTHON" to 60, "JAVASCRIPT" to 60),
+                    listOf("KOTLIN" to 95, "JAVA" to 80, "OCaml" to 60, "Python" to 60),
                     size = ModuleSize.SMALL,
                 )
 
                 EnvironmentModule(
                     "/usr/bin",
                     listOf(
-                        "AGENTIC",
+                        "AI AGENTS",
                         "DOCKER",
                         "INTELLIJ IDEA",
                         "ANDROID STUDIO",

@@ -38,7 +38,7 @@ fun BootSequence(onFinished: () -> Unit = {}) {
             listOf(
                 "OS: Malefic v${Random.nextInt(0..9)}.${Random.nextInt(0..9)}.${Random.nextInt(0..9)}-stable",
                 "Kernel: Linux ${Random.nextInt(0..9)}.${Random.nextInt(0..9)}.${Random.nextInt(0..9)}-malefic-x86_64",
-                "Shell: Kotlin 2.1.0",
+                "Shell: Kotlin 2.4.21",
                 "WM: Dank Material Shell on Niri",
                 "Uptime: ${Date().toKotlinInstant() - START_TIME}",
                 "----------------------------------",
