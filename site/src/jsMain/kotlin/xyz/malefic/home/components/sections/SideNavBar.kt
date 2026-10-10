@@ -70,12 +70,15 @@ val SideNavItemStyle =
             Modifier
                 .fillMaxWidth()
                 .padding(topBottom = 8.px, leftRight = 16.px)
-                .color(AppColors.static.onSecondary.variable)
-                .transition(Transition.of("background-color", 0.2.s))
+                .color(AppColors.static.secondary.variable)
+                .transition(Transition.of("color", 0.5.s))
+                .transition(Transition.of("background-color", 0.5.s))
                 .cursor(Pointer)
         }
         hover {
-            Modifier.background(AppColors.static.secondaryTranslucent.variable)
+            Modifier
+                .background(AppColors.static.secondaryTranslucent.variable)
+                .color(AppColors.static.onSecondary.variable)
         }
     }
 

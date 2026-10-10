@@ -58,17 +58,10 @@ fun BootSequence(onFinished: () -> Unit = {}) {
         }
     }
 
-    Column(
-        BootSequenceStyle
-            .toModifier()
-            .fillMaxSize()
-            .padding(20.px),
-    ) {
+    Column(BootSequenceStyle.toModifier().fillMaxSize().padding(20.px)) {
         for (i in 0..currentLineIndex) {
             if (i < lines.size) {
-                TypewriterText(
-                    lines[i],
-                ) {
+                TypewriterText(lines[i]) {
                     if (i == currentLineIndex) {
                         if (currentLineIndex < lines.size - 1) {
                             currentLineIndex++
