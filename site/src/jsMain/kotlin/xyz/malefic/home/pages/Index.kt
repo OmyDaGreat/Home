@@ -38,7 +38,7 @@ var isBooting by mutableStateOf(true)
 val HeroSpanStyle =
     SpanStyle(
         2 to 2,
-        3 to 4,
+        2 to 4,
         2 to 8,
         1 to 12,
     )

@@ -21,8 +21,8 @@ import xyz.malefic.home.styles.AppTypography
 
 val ProjectSpanStyle =
     SpanStyle(
-        1 to 1,
-        1 to 2,
+        4 to 1,
+        3 to 2,
         2 to 4,
         2 to 6,
     )
