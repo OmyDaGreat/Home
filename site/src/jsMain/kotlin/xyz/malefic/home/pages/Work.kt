@@ -31,6 +31,7 @@ val ProjectSpanStyle =
 fun Project(
     name: String,
     description: String,
+    link: String = "https://github.com/OmyDaGreat/$name/",
     extra: @Composable () -> Unit = {},
 ) {
     TerminalTile(
@@ -39,7 +40,7 @@ fun Project(
         modifier = ProjectSpanStyle.toModifier(),
     ) {
         Column(Modifier.padding(24.px).gap(16.px)) {
-            Link("https://github.com/OmyDaGreat/$name/", name.uppercase(), AppTypography.headlineMd, variant = AlwaysUnderlinedLinkVariant)
+            Link(link, name.uppercase(), AppTypography.headlineMd, variant = AlwaysUnderlinedLinkVariant)
             SpanText(description, AppTypography.bodyMd)
             extra()
         }
@@ -66,5 +67,20 @@ fun WorkPage() {
         ) {
             Link("https://kanman.malefic.xyz/", "Visit the KanMan Demo", AppTypography.codeSm, variant = AlwaysUnderlinedLinkVariant)
         }
+        Project(
+            "aries",
+            "Dictation-controlled computer actions, focused on teaching digital literacy to the elderly through controlling your computer.",
+        ) {
+            Link(
+                "https://www.congressionalappchallenge.us/24-CA46/",
+                "Congressional App Challenge Winner 2024",
+                AppTypography.codeSm,
+                variant = AlwaysUnderlinedLinkVariant,
+            )
+        }
+        Project(
+            "leviathan",
+            "A personal assistant that doubles as a pet simulator, allowing you to play games, set reminders, and complete productive tasks with time management tools.",
+        )
     }
 }
