@@ -10,6 +10,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
+import com.varabyte.kobweb.silk.components.navigation.AlwaysUnderlinedLinkVariant
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
@@ -64,8 +65,8 @@ fun AboutPage() =
         ) {
             Column(Modifier.padding(16.px).gap(8.px)) {
                 SpanText("DISCORD: ._malefic_.", AppTypography.codeSm)
-                Link("https://github.com/OmyDaGreat", "GITHUB: @OmyDaGreat", AppTypography.codeSm)
-                Link("https://linkedin.malefic.xyz", "LINKEDIN: Om Gupta", AppTypography.codeSm)
+                Link("https://github.com/OmyDaGreat", "GITHUB: @OmyDaGreat", AppTypography.codeSm, variant = AlwaysUnderlinedLinkVariant)
+                Link("https://linkedin.malefic.xyz", "LINKEDIN: Om Gupta", AppTypography.codeSm, variant = AlwaysUnderlinedLinkVariant)
             }
         }
     }
