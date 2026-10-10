@@ -10,6 +10,8 @@ import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
+import com.varabyte.kobweb.silk.components.navigation.AlwaysUnderlinedLinkVariant
+import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.px
@@ -19,10 +21,10 @@ import xyz.malefic.home.styles.AppTypography
 
 val WorkLargeSpanStyle =
     SpanStyle(
-        3 to 2,
-        3 to 4,
-        3 to 8,
-        3 to 12,
+        1 to 1,
+        1 to 2,
+        2 to 4,
+        2 to 6,
     )
 
 @Page
@@ -41,10 +43,9 @@ fun WorkPage() {
             modifier = WorkLargeSpanStyle.toModifier(),
         ) {
             Column(Modifier.padding(24.px).gap(16.px)) {
-                SpanText("KANMAN", AppTypography.headlineMd)
+                Link("https://github.com/OmyDaGreat/KanMan/", "KANMAN", AppTypography.headlineMd, variant = AlwaysUnderlinedLinkVariant)
                 SpanText(
-                    "Kotlin-based Kanban tool with TUI support and Postgres backend. " +
-                        "Focused on extreme productivity and zero-latency drag-and-drop operations.",
+                    "Another™ Kanban task manager, made with Http4k and Kobweb, supporting alternative clients, a public/private board invitation & role system, and a helpful personal dashboard.",
                     AppTypography.bodyMd,
                 )
             }
