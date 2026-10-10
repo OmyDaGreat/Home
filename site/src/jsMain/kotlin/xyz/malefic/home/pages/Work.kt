@@ -19,13 +19,32 @@ import xyz.malefic.home.components.widgets.SpanStyle
 import xyz.malefic.home.components.widgets.TerminalTile
 import xyz.malefic.home.styles.AppTypography
 
-val WorkLargeSpanStyle =
+val ProjectSpanStyle =
     SpanStyle(
         1 to 1,
         1 to 2,
         2 to 4,
         2 to 6,
     )
+
+@Composable
+fun Project(
+    name: String,
+    description: String,
+    extra: @Composable () -> Unit = {},
+) {
+    TerminalTile(
+        title = "~/projects/$name",
+        status = "[ RUNNING ]",
+        modifier = ProjectSpanStyle.toModifier(),
+    ) {
+        Column(Modifier.padding(24.px).gap(16.px)) {
+            Link("https://github.com/OmyDaGreat/$name/", name.uppercase(), AppTypography.headlineMd, variant = AlwaysUnderlinedLinkVariant)
+            SpanText(description, AppTypography.bodyMd)
+            extra()
+        }
+    }
+}
 
 @Page
 @Composable
@@ -37,18 +56,15 @@ fun WorkPage() {
             .gap(16.px)
             .gridAutoRows { size(120.px) },
     ) {
-        TerminalTile(
-            title = "~/projects/kanman",
-            status = "[ RUNNING ]",
-            modifier = WorkLargeSpanStyle.toModifier(),
+        Project(
+            "home",
+            "My portfolio and site homepage! Built with Kobweb, this site is a showcase of my work and a hub for anything me-related.",
+        )
+        Project(
+            "kanman",
+            "Another™ Kanban task manager, made with Http4k and Kobweb, supporting alternative clients, a public/private board invitation & role system, and a helpful personal dashboard.",
         ) {
-            Column(Modifier.padding(24.px).gap(16.px)) {
-                Link("https://github.com/OmyDaGreat/KanMan/", "KANMAN", AppTypography.headlineMd, variant = AlwaysUnderlinedLinkVariant)
-                SpanText(
-                    "Another™ Kanban task manager, made with Http4k and Kobweb, supporting alternative clients, a public/private board invitation & role system, and a helpful personal dashboard.",
-                    AppTypography.bodyMd,
-                )
-            }
+            Link("https://kanman.malefic.xyz/", "Visit the KanMan Demo", AppTypography.codeSm, variant = AlwaysUnderlinedLinkVariant)
         }
     }
 }
