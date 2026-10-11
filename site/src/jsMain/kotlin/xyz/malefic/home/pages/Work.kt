@@ -46,10 +46,9 @@ fun ProjectCategory(
                     Project(
                         pName,
                         pDescription,
-                        titlePrefix = "${name.replace(' ', '_')}/",
-                        status = "[$pStatus]",
-                        extra = pExtra,
-                    )
+                        "${name.replace(' ', '_')}/",
+                        "[$pStatus]",
+                    ) { pExtra() }
                 }
             }
         }
@@ -60,9 +59,9 @@ fun ProjectCategory(
 fun Project(
     name: String,
     description: String,
+    titlePrefix: String,
+    status: String,
     link: String = "https://github.com/OmyDaGreat/$name/",
-    titlePrefix: String = "",
-    status: String = "[RUNNING]",
     extra: @Composable () -> Unit = {},
 ) {
     TerminalTile(
@@ -117,9 +116,7 @@ fun WorkPage() {
             ProjectData(
                 "DailyMalefic",
                 "A self-hostable journal entry rest server with youtube music integration, acting as a backend for Mournal",
-            ) {
-                SpanText("Access the DailyMalefic API at https://daily.malefic.xyz/api", AppTypography.bodyMd)
-            },
+            ),
             ProjectData("StackManager", "A server Docker stack manager for a very specific setup w/ Tailscale"),
         )
         ProjectCategory(
