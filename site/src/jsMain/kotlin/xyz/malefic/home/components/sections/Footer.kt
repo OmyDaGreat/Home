@@ -29,6 +29,7 @@ import org.jetbrains.compose.web.css.px
 import xyz.malefic.home.styles.AppColors
 import xyz.malefic.home.styles.AppTypography
 import kotlin.js.Date
+import kotlin.math.roundToInt
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Instant
@@ -75,7 +76,13 @@ fun Footer() {
         Row(Modifier.gap(24.px), verticalAlignment = Alignment.CenterVertically) {
             SpanText("UPTIME: $uptime", AppTypography.codeSm.color(AppColors.static.onSurfaceVariant.current))
             SpanText(
-                "LOAD: ${Random.nextDouble(.0,1.0)} / ${Random.nextDouble(.0, 1.0)} / ${Random.nextDouble(.0, 1.0)}",
+                "LOAD: ${
+                    (Random.nextDouble(.0,1.0) * 100).roundToInt() / 100.0
+                } / ${
+                    (Random.nextDouble(.0,1.0) * 100).roundToInt() / 100.0
+                } / ${
+                    (Random.nextDouble(.0,1.0) * 100).roundToInt() / 100.0
+                }",
                 AppTypography.codeSm.color(AppColors.static.onSurfaceVariant.current),
             )
             SpanText("UTC: $timeISO", AppTypography.codeSm.color(AppColors.static.onSurfaceVariant.current))
