@@ -48,8 +48,8 @@ val HeroSpanStyle =
 val AboutTallSpanStyle =
     SpanStyle(
         2 to 2,
-        1 to 4,
-        1 to 4,
+        2 to 4,
+        2 to 4,
         1 to 8,
     )
 
@@ -57,7 +57,7 @@ val AboutSmallSpanStyle =
     SpanStyle(
         2 to 2,
         2 to 2,
-        2 to 4,
+        1 to 4,
         1 to 4,
     )
 
@@ -88,7 +88,7 @@ fun HomePage() {
                     ) {
                         SpanText("MALEFIC_PORTFOLIO", AppTypography.displayLg)
                         SpanText(
-                            "High-performance creative engineering specializing in Kotlin, Linux ecosystems, and minimal UI architectures.",
+                            "High-performance creative engineering specializing in Kotlin, Linux ecosystems, and minimally scoped but maximal utility architectures.",
                             AppTypography.bodyLg.color(AppColors.static.onSurfaceVariant.current).margin(top = 16.px),
                         )
                     }
@@ -99,9 +99,9 @@ fun HomePage() {
                     modifier = AboutTallSpanStyle.toModifier(),
                 ) {
                     Column(Modifier.padding(24.px).gap(16.px)) {
-                        SpanText("Identity_Node", AppTypography.displayLg)
+                        SpanText("OM GUPTA / MALEFIC", AppTypography.displayLg)
                         SpanText(
-                            "I am a developer focused on internals and devtools, but with a wide range of experience in various fields. I am currently pursuing an AB in Computer Science at Harvard University, and I am always looking for new opportunities to learn and grow as well as people to collaborate with!",
+                            "I'm a developer focused on internals and devtools, but with a wide range of experience in various fields. I'm currently pursuing an AB in Computer Science at Harvard University, and am always looking for new opportunities to learn and grow as well as people to collaborate with!",
                             AppTypography.bodyMd,
                         )
                     }
@@ -112,6 +112,7 @@ fun HomePage() {
                     modifier = AboutSmallSpanStyle.toModifier(),
                 ) {
                     Column(Modifier.padding(16.px).gap(8.px)) {
+                        SpanText("CONNECT", AppTypography.headlineMd)
                         SpanText("DISCORD: ._malefic_.", AppTypography.codeSm)
                         Link(
                             "https://github.com/OmyDaGreat",
