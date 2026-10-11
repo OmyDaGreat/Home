@@ -4,36 +4,18 @@ import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.Page
-import com.varabyte.kobweb.silk.components.layout.SimpleGrid
-import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.navigation.AlwaysUnderlinedLinkVariant
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.px
-import xyz.malefic.home.components.widgets.SpanStyle
+import xyz.malefic.home.components.widgets.Masonry
+import xyz.malefic.home.components.widgets.MasonryItemStyle
 import xyz.malefic.home.components.widgets.TerminalTile
 import xyz.malefic.home.styles.AppTypography
-
-val ProjectSpanStyle =
-    SpanStyle(
-        4 to 1,
-        3 to 1,
-        2 to 1,
-        2 to 1,
-    )
-
-val ProjectCategorySpanStyle =
-    SpanStyle(
-        base = 4 to 1,
-        sm = 3 to 1,
-        md = 2 to 1,
-        lg = 2 to 1,
-    )
 
 data class ProjectData(
     val name: String,
@@ -51,22 +33,18 @@ fun ProjectCategory(
     TerminalTile(
         title = "~/projects/$name",
         status = "",
-        modifier = ProjectCategorySpanStyle.toModifier(),
+        modifier = MasonryItemStyle.toModifier(),
     ) {
         Column(Modifier.padding(24.px).gap(16.px), horizontalAlignment = Alignment.CenterHorizontally) {
             SpanText(name.uppercase(), AppTypography.headlineMd)
             SpanText(description, AppTypography.bodyMd)
-            SimpleGrid(
-                numColumns(base = 1, sm = 1, md = 2, lg = 2),
-                Modifier.fillMaxWidth().gap(16.px),
-            ) {
+            Masonry {
                 projects.forEach { (pName, pDescription, pStatus, pExtra) ->
                     Project(
                         pName,
                         pDescription,
                         titlePrefix = "${name.replace(' ', '_')}/",
                         status = "[$pStatus]",
-                        modifier = Modifier,
                         extra = pExtra,
                     )
                 }
@@ -80,7 +58,7 @@ fun Project(
     name: String,
     description: String,
     link: String = "https://github.com/OmyDaGreat/$name/",
-    modifier: Modifier = ProjectSpanStyle.toModifier(),
+    modifier: Modifier = MasonryItemStyle.toModifier(),
     titlePrefix: String = "",
     status: String = "[RUNNING]",
     extra: @Composable () -> Unit = {},
@@ -101,10 +79,7 @@ fun Project(
 @Page
 @Composable
 fun WorkPage() {
-    SimpleGrid(
-        numColumns(1, 1, 2, 2),
-        Modifier.fillMaxWidth().gap(16.px),
-    ) {
+    Masonry {
         ProjectCategory(
             "Websites",
             "Sites and web apps I've built with Kobweb and Http4k, from portfolios to freelance work.",
