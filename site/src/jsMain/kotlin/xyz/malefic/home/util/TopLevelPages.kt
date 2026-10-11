@@ -5,8 +5,8 @@ enum class TopLevelPages(
     val route: String,
 ) {
     INDEX("Index", "/"),
-    WORK("Work", "/work"),
     ABOUT("About", "/about"),
+    WORK("Work", "/work"),
     ;
 
     fun isCurrentPage(currentRoute: String): Boolean {
