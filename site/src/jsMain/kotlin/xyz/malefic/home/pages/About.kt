@@ -23,7 +23,7 @@ val AboutTallSpanStyle =
     SpanStyle(
         2 to 2,
         2 to 4,
-        2 to 8,
+        2 to 4,
         2 to 8,
     )
 
