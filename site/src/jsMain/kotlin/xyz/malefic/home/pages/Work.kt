@@ -1,11 +1,13 @@
 package xyz.malefic.home.pages
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.navigation.AlwaysUnderlinedLinkVariant
 import com.varabyte.kobweb.silk.components.navigation.Link
@@ -38,7 +40,7 @@ fun ProjectCategory(
     ) {
         Column(Modifier.padding(24.px).gap(16.px), horizontalAlignment = Alignment.CenterHorizontally) {
             SpanText(name.uppercase(), AppTypography.headlineMd)
-            SpanText(description, AppTypography.bodyMd)
+            SpanText(description, AppTypography.bodyMd.textAlign(TextAlign.Center))
             Masonry(MasonrySquaredStyle.toModifier()) {
                 projects.forEach { (pName, pDescription, pStatus, pExtra) ->
                     Project(
