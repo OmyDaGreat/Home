@@ -12,6 +12,7 @@ import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.style.extendedBy
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
@@ -26,6 +27,16 @@ val MasonryStyle =
         }
     }
 
+val MasonrySquaredStyle =
+    MasonryStyle.extendedBy {
+        Breakpoint.MD {
+            Modifier.columnCount(1)
+        }
+        Breakpoint.XL {
+            Modifier.columnCount(2)
+        }
+    }
+
 val MasonryItemStyle =
     CssStyle.base {
         Modifier.fillMaxWidth().margin(bottom = 16.px).breakInside(BreakInside.Avoid)
@@ -33,14 +44,14 @@ val MasonryItemStyle =
 
 @Composable
 fun Masonry(
-    modifier: Modifier = Modifier,
+    masonryModifier: Modifier = MasonryStyle.toModifier(),
+    extraModifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
     Div(
-        MasonryStyle
-            .toModifier()
+        masonryModifier
             .fillMaxWidth()
-            .then(modifier)
+            .then(extraModifier)
             .toAttrs(),
     ) { content() }
 }

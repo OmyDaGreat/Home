@@ -14,6 +14,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.px
 import xyz.malefic.home.components.widgets.Masonry
 import xyz.malefic.home.components.widgets.MasonryItemStyle
+import xyz.malefic.home.components.widgets.MasonrySquaredStyle
 import xyz.malefic.home.components.widgets.TerminalTile
 import xyz.malefic.home.styles.AppTypography
 
@@ -38,7 +39,7 @@ fun ProjectCategory(
         Column(Modifier.padding(24.px).gap(16.px), horizontalAlignment = Alignment.CenterHorizontally) {
             SpanText(name.uppercase(), AppTypography.headlineMd)
             SpanText(description, AppTypography.bodyMd)
-            Masonry {
+            Masonry(MasonrySquaredStyle.toModifier()) {
                 projects.forEach { (pName, pDescription, pStatus, pExtra) ->
                     Project(
                         pName,
@@ -58,15 +59,14 @@ fun Project(
     name: String,
     description: String,
     link: String = "https://github.com/OmyDaGreat/$name/",
-    modifier: Modifier = MasonryItemStyle.toModifier(),
     titlePrefix: String = "",
     status: String = "[RUNNING]",
     extra: @Composable () -> Unit = {},
 ) {
     TerminalTile(
-        title = "~/projects/$titlePrefix$name",
-        status = status,
-        modifier = modifier,
+        MasonryItemStyle.toModifier(),
+        "~/projects/$titlePrefix$name",
+        status,
     ) {
         Column(Modifier.padding(24.px).gap(16.px)) {
             Link(link, name.uppercase(), AppTypography.headlineMd, variant = AlwaysUnderlinedLinkVariant)
