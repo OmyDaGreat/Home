@@ -71,10 +71,7 @@ fun HomePage() {
         MainLayout {
             SimpleGrid(
                 numColumns(base = 1, sm = 4, md = 8, lg = 12),
-                Modifier
-                    .fillMaxWidth()
-                    .gap(16.px)
-                    .gridAutoRows { size(240.px) },
+                Modifier.fillMaxWidth().gap(16.px).gridAutoRows { size(240.px) },
             ) {
                 TerminalTile(
                     HeroSpanStyle.toModifier(),
