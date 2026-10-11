@@ -31,9 +31,9 @@ fun ProjectCategory(
     vararg projects: ProjectData,
 ) {
     TerminalTile(
-        title = "~/projects/$name",
-        status = "",
-        modifier = MasonryItemStyle.toModifier(),
+        MasonryItemStyle.toModifier(),
+        "~/projects/${name.replace(' ', '_')}",
+        "",
     ) {
         Column(Modifier.padding(24.px).gap(16.px), horizontalAlignment = Alignment.CenterHorizontally) {
             SpanText(name.uppercase(), AppTypography.headlineMd)
@@ -87,17 +87,17 @@ fun WorkPage() {
                 "Home",
                 "My portfolio and site homepage! Built with Kobweb, this site is a showcase of my work and a hub for anything me-related.",
             ),
-            ProjectData(
-                "GuptaRealEstate",
-                "The website for First Team’s Gupta Real Estate, built through Kotlin Multiplatform with a Kobweb frontend and an http4k backend.",
-            ) {
-                Link("https://guptare.com/", "Visit Gupta Real Estate", AppTypography.codeSm, variant = AlwaysUnderlinedLinkVariant)
-            },
             ProjectData("404", "A Kobweb 404 page, acting as the redirect page for any unknown subdomain on malefic.xyz") {
                 Link("https://404.malefic.xyz/", "Visit the 404 Page", AppTypography.codeSm, variant = AlwaysUnderlinedLinkVariant)
             },
             ProjectData("Mournal", "A music journal frontend for the DailyMalefic server, made with Kobweb") {
                 Link("https://mournal.malefic.xyz/", "Visit Mournal", AppTypography.codeSm, variant = AlwaysUnderlinedLinkVariant)
+            },
+            ProjectData(
+                "GuptaRealEstate",
+                "The website for First Team’s Gupta Real Estate, built through Kotlin Multiplatform with a Kobweb frontend and an http4k backend.",
+            ) {
+                Link("https://guptare.com/", "Visit Gupta Real Estate", AppTypography.codeSm, variant = AlwaysUnderlinedLinkVariant)
             },
             ProjectData("MITLicense", "My MIT License hosted online, with cool effects!"),
             ProjectData("AddItUp", "A Kobweb site for the Add It Up nonprofit"),
@@ -111,39 +111,42 @@ fun WorkPage() {
             ) {
                 Link("https://kanman.malefic.xyz/", "Visit the KanMan Demo", AppTypography.codeSm, variant = AlwaysUnderlinedLinkVariant)
             },
+            ProjectData("malefirc", "An irc-style server and web client setup made with Kobweb.", "WIP"),
             ProjectData(
                 "DailyMalefic",
                 "A self-hostable journal entry rest server with youtube music integration, acting as a backend for Mournal",
             ) {
                 SpanText("Access the DailyMalefic API at https://daily.malefic.xyz/api", AppTypography.bodyMd)
             },
-            ProjectData("malefirc", "An irc-style server and web client setup made with Kobweb.", "WIP"),
             ProjectData("StackManager", "A server Docker stack manager for a very specific setup w/ Tailscale"),
-        )
-        ProjectCategory(
-            "Web Toolkit",
-            "Libraries, frameworks, and templates for building on the web, so you can skip the boilerplate.",
-            ProjectData("Koven", "A Kobweb + Http4k opinionated wrapper web framework", "WIP"),
-            ProjectData("kutint", "A Color extension utility library for Kobweb and Compose HTML"),
-            ProjectData("StaticSiteTemplate", "A Kobweb template for a static website"),
-            ProjectData("DynamicSiteTemplate", "A Kobweb + Http4k template for a dynamic website"),
-            ProjectData(
-                "MaleficStyle",
-                "A styling library for compose based on CSS and DSLs, wrapping modifiers and providing a more idiomatic way to style your components.",
-            ),
-            ProjectData("Doppelganger", "An SVG wrapper for Kotlin, supporting Compose Multiplatform and Kobweb", "WIP"),
-            ProjectData("MaleficTonic", "A jekyll theme for Hack Club's Tonic"),
         )
         ProjectCategory(
             "Terminal",
             "Command-line and terminal apps, built to be fast and comfortable to use from just the keyboard.",
             ProjectData("sailboat", "A TUI-based AI-powered Harvard SEAS alert system, created for journalists to keep up to date"),
+            ProjectData("ArcadeTUI", "A Kotlin Arcade Machine for the terminal, extensible with a wide variety of games!", "WIP"),
+            ProjectData(
+                "mfc",
+                "A Kotlin-based terminal application for managing Gradle tasks, RSS feeds, and scheduled jobs via a unified interface.",
+                "WIP",
+            ),
             ProjectData("Kommit", "A conventional commit generator made with Kotlin!"),
-            ProjectData("mfc", "A multi-use general purpose terminal application", "WIP"),
-            ProjectData("ArcadeTUI", "A Kotlin Arcade Machine for the terminal!", "WIP"),
             ProjectData("Profile", "A terminal-based git profile switcher made with Kotlin", "WIP"),
             ProjectData("Filame", "A tool to manage Arch Linux configuration across multiple devices", "WIP"),
             ProjectData("KotlinScriptTemplate", "A scripting template with built-in scoop support"),
+        )
+        ProjectCategory(
+            "JVM Libraries",
+            "Kotlin libraries and starter templates for the JVM, designed to play nice even with a Java environment.",
+            ProjectData("MaleficTypes", "A union types framework for Kotlin/JVM"),
+            ProjectData("Malefix", "A Kotlin util library for FRC!"),
+            ProjectData("KotlinLibraryTemplate", "A Kotlin/JVM library template with everything you need to get started"),
+        )
+        ProjectCategory(
+            "Multiplatform Libraries",
+            "Libraries and templates sharing code across most Kotlin Multiplatform targets, focusing on interoperability to the extreme.",
+            ProjectData("emKt", "A multiplatform signal library, similar to Godot's signals!"),
+            ProjectData("MultiLibTemplate", "A Kotlin Multiplatform library template"),
         )
         ProjectCategory(
             "Desktop & Mobile",
@@ -159,11 +162,11 @@ fun WorkPage() {
                     variant = AlwaysUnderlinedLinkVariant,
                 )
             },
+            ProjectData("SteinsGit", "A modern git client, designed for ease of use and simplicity.", "WIP"),
             ProjectData(
                 "Leviathan",
                 "A personal assistant that doubles as a pet simulator, allowing you to play games, set reminders, and complete productive tasks with time management tools.",
             ),
-            ProjectData("SteinsGit", "A modern git client, designed for ease of use and simplicity.", "WIP"),
             ProjectData("MusicPlayer", "A music player created with Kolin for desktop!", "WIP"),
         )
         ProjectCategory(
@@ -187,17 +190,18 @@ fun WorkPage() {
             ProjectData("Macalicious", "A Kotlin/Native Mac project template, supporting many features specific to macOS development"),
         )
         ProjectCategory(
-            "JVM Libraries",
-            "Kotlin libraries and starter templates for the JVM, designed to play nice even with a Java environment.",
-            ProjectData("KotlinLibraryTemplate", "A Kotlin/JVM library template with everything you need to get started"),
-            ProjectData("MaleficTypes", "A union types framework for Kotlin/JVM"),
-            ProjectData("Malefix", "A Kotlin util library for FRC!"),
-        )
-        ProjectCategory(
-            "Multiplatform Libraries",
-            "Libraries and templates sharing code across most Kotlin Multiplatform targets, focusing on interoperability to the extreme.",
-            ProjectData("emKt", "A multiplatform signal library, similar to Godot's signals!"),
-            ProjectData("MultiLibTemplate", "A Kotlin Multiplatform library template"),
+            "Web Toolkit",
+            "Libraries, frameworks, and templates for building on the web, so you can skip the boilerplate.",
+            ProjectData("Koven", "A Kobweb + Http4k opinionated wrapper web framework", "WIP"),
+            ProjectData("StaticSiteTemplate", "A Kobweb template for a static website"),
+            ProjectData("DynamicSiteTemplate", "A Kobweb + Http4k template for a dynamic website"),
+            ProjectData("MaleficTonic", "A jekyll theme for Hack Club's Tonic"),
+            ProjectData(
+                "MaleficStyle",
+                "A styling library for compose based on CSS and DSLs, wrapping modifiers and providing a more idiomatic way to style your components.",
+            ),
+            ProjectData("Doppelganger", "An SVG wrapper for Kotlin, supporting Compose Multiplatform and Kobweb", "WIP"),
+            ProjectData("kutint", "A Color extension utility library for Kobweb and Compose HTML"),
         )
     }
 }

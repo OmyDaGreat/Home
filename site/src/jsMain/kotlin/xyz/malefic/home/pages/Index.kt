@@ -79,10 +79,7 @@ fun HomePage() {
                     "[ READ_ONLY ]",
                     Modifier.color(AppColors.static.signalViolet.current),
                 ) {
-                    Column(
-                        Modifier.padding(24.px).fillMaxSize(),
-                        verticalArrangement = Arrangement.Center,
-                    ) {
+                    Column(Modifier.padding(24.px).fillMaxSize(), verticalArrangement = Arrangement.Center) {
                         SpanText("MALEFIC_PORTFOLIO", AppTypography.displayLg)
                         SpanText(
                             "High-performance creative engineering specializing in Kotlin, Linux ecosystems, and minimally scoped but maximal utility architectures.",
@@ -92,10 +89,10 @@ fun HomePage() {
                 }
 
                 TerminalTile(
-                    title = "~/identity_node.txt",
-                    modifier = AboutTallSpanStyle.toModifier(),
+                    AboutTallSpanStyle.toModifier(),
+                    "~/identity_node.txt",
                 ) {
-                    Column(Modifier.padding(24.px).gap(16.px)) {
+                    Column(Modifier.padding(24.px).gap(16.px).fillMaxSize(), verticalArrangement = Arrangement.Center) {
                         SpanText("OM GUPTA / MALEFIC", AppTypography.displayLg)
                         SpanText(
                             "I'm a developer focused on internals and devtools, but with a wide range of experience in various fields. I'm currently pursuing an AB in Computer Science at Harvard University, and am always looking for new opportunities to learn and grow as well as people to collaborate with!",
@@ -105,8 +102,8 @@ fun HomePage() {
                 }
 
                 TerminalTile(
-                    title = "contact_node.txt",
-                    modifier = AboutSmallSpanStyle.toModifier(),
+                    AboutSmallSpanStyle.toModifier(),
+                    "contact_node.txt",
                 ) {
                     Column(Modifier.padding(16.px).gap(8.px)) {
                         SpanText("CONNECT", AppTypography.headlineMd)
