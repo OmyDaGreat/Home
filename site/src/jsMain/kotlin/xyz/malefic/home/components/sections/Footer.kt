@@ -29,6 +29,7 @@ import org.jetbrains.compose.web.css.px
 import xyz.malefic.home.styles.AppColors
 import xyz.malefic.home.styles.AppTypography
 import kotlin.js.Date
+import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Instant
 import kotlin.time.toKotlinInstant
@@ -50,13 +51,13 @@ val FooterContainerStyle =
 @Composable
 fun Footer() {
     val initialDate = remember { Date() }
-    var timeStr by remember { mutableStateOf(initialDate.toISOString().substring(11, 19)) }
+    var timeISO by remember { mutableStateOf(initialDate.toISOString().substring(11, 19)) }
     var uptime by remember { mutableStateOf(initialDate.toKotlinInstant() - START_TIME) }
 
     LaunchedEffect(Unit) {
         while (true) {
             val now = Date()
-            timeStr = now.toISOString().substring(11, 19)
+            timeISO = now.toISOString().substring(11, 19)
             uptime = now.toKotlinInstant() - START_TIME
 
             val msToNextSecond = 1000 - (now.getTime() % 1000).toLong()
@@ -69,12 +70,15 @@ fun Footer() {
         Arrangement.SpaceBetween,
         Alignment.CenterVertically,
     ) {
-        SpanText("[ SYSTEM READY ]", AppTypography.codeSm.color(AppColors.static.tertiary.current))
+        SpanText("[ SYSTEMS OPERATIONAL ]", AppTypography.codeSm.color(AppColors.static.tertiary.current))
 
         Row(Modifier.gap(24.px), verticalAlignment = Alignment.CenterVertically) {
             SpanText("UPTIME: $uptime", AppTypography.codeSm.color(AppColors.static.onSurfaceVariant.current))
-            SpanText("LOAD: 0.14 / 0.11 / 0.08", AppTypography.codeSm.color(AppColors.static.onSurfaceVariant.current))
-            SpanText("UTC: $timeStr", AppTypography.codeSm.color(AppColors.static.onSurfaceVariant.current))
+            SpanText(
+                "LOAD: ${Random.nextDouble(.0,1.0)} / ${Random.nextDouble(.0, 1.0)} / ${Random.nextDouble(.0, 1.0)}",
+                AppTypography.codeSm.color(AppColors.static.onSurfaceVariant.current),
+            )
+            SpanText("UTC: $timeISO", AppTypography.codeSm.color(AppColors.static.onSurfaceVariant.current))
         }
 
         SpanText("● ONLINE", AppTypography.codeSm.color(AppColors.static.secondary.current))
