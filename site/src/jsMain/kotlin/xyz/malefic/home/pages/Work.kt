@@ -41,10 +41,11 @@ fun Project(
     description: String,
     link: String = "https://github.com/OmyDaGreat/$name/",
     modifier: Modifier = ProjectSpanStyle.toModifier(),
+    titlePrefix: String = "",
     extra: @Composable () -> Unit = {},
 ) {
     TerminalTile(
-        title = "~/projects/$name",
+        title = "~/projects/$titlePrefix$name",
         status = "[ RUNNING ]",
         modifier = modifier,
     ) {
@@ -75,7 +76,7 @@ fun ProjectCategory(
                 Modifier.fillMaxWidth().gap(16.px),
             ) {
                 projects.forEach { (name, description) ->
-                    Project(name, description, modifier = Modifier)
+                    Project(name, description, titlePrefix = "$name/", modifier = Modifier)
                 }
             }
         }

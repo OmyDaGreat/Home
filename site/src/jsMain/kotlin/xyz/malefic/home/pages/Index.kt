@@ -18,6 +18,8 @@ import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
+import com.varabyte.kobweb.silk.components.navigation.AlwaysUnderlinedLinkVariant
+import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.px
@@ -41,6 +43,22 @@ val HeroSpanStyle =
         2 to 4,
         2 to 8,
         1 to 12,
+    )
+
+val AboutTallSpanStyle =
+    SpanStyle(
+        2 to 2,
+        1 to 4,
+        1 to 4,
+        1 to 8,
+    )
+
+val AboutSmallSpanStyle =
+    SpanStyle(
+        2 to 2,
+        2 to 2,
+        2 to 4,
+        1 to 4,
     )
 
 @Page
@@ -72,6 +90,40 @@ fun HomePage() {
                         SpanText(
                             "High-performance creative engineering specializing in Kotlin, Linux ecosystems, and minimal UI architectures.",
                             AppTypography.bodyLg.color(AppColors.static.onSurfaceVariant.current).margin(top = 16.px),
+                        )
+                    }
+                }
+
+                TerminalTile(
+                    title = "~/identity_node.txt",
+                    modifier = AboutTallSpanStyle.toModifier(),
+                ) {
+                    Column(Modifier.padding(24.px).gap(16.px)) {
+                        SpanText("Identity_Node", AppTypography.displayLg)
+                        SpanText(
+                            "I am a developer focused on internals and devtools, but with a wide range of experience in various fields. I am currently pursuing an AB in Computer Science at Harvard University, and I am always looking for new opportunities to learn and grow as well as people to collaborate with!",
+                            AppTypography.bodyMd,
+                        )
+                    }
+                }
+
+                TerminalTile(
+                    title = "contact_node.txt",
+                    modifier = AboutSmallSpanStyle.toModifier(),
+                ) {
+                    Column(Modifier.padding(16.px).gap(8.px)) {
+                        SpanText("DISCORD: ._malefic_.", AppTypography.codeSm)
+                        Link(
+                            "https://github.com/OmyDaGreat",
+                            "GITHUB: @OmyDaGreat",
+                            AppTypography.codeSm,
+                            variant = AlwaysUnderlinedLinkVariant,
+                        )
+                        Link(
+                            "https://linkedin.malefic.xyz",
+                            "LINKEDIN: Om Gupta",
+                            AppTypography.codeSm,
+                            variant = AlwaysUnderlinedLinkVariant,
                         )
                     }
                 }
