@@ -11,7 +11,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.gap
-import com.varabyte.kobweb.compose.ui.modifiers.opacity
 import com.varabyte.kobweb.compose.ui.modifiers.overflow
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.width
@@ -85,7 +84,6 @@ fun SystemJournal(
                         "[ ${log.timestamp} ]",
                         AppTypography.codeSm
                             .color(AppColors.static.outline.current)
-                            .opacity(0.7)
                             .width(84.px),
                     )
                     SpanText(

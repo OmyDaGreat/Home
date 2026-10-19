@@ -1,6 +1,7 @@
 package xyz.malefic.home.components.widgets
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.Animation
 import com.varabyte.kobweb.compose.css.AnimationIterationCount
 import com.varabyte.kobweb.compose.css.VerticalAlign
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -16,19 +17,24 @@ import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.animation.Keyframes
 import com.varabyte.kobweb.silk.style.toModifier
-import org.jetbrains.compose.web.css.AnimationDirection
+import org.jetbrains.compose.web.css.AnimationTimingFunction
+import org.jetbrains.compose.web.css.CSSMediaQuery
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.DisplayStyle
+import org.jetbrains.compose.web.css.StylePropertyValue
 import org.jetbrains.compose.web.css.ch
 import org.jetbrains.compose.web.css.em
+import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.s
 import org.jetbrains.compose.web.dom.Span
 
+// A real terminal cursor snaps on and off rather than fading
 val Blink =
     Keyframes {
-        from { Modifier.opacity(1) }
-        to { Modifier.opacity(0) }
+        0.percent { Modifier.opacity(1) }
+        50.percent { Modifier.opacity(0) }
+        100.percent { Modifier.opacity(0) }
     }
 
 val BlinkingCursorStyle =
@@ -41,12 +47,15 @@ val BlinkingCursorStyle =
                 .backgroundColor(Color.currentColor)
                 .animation(
                     Blink.toAnimation(
-                        duration = 0.5.s,
+                        duration = 1.s,
+                        timingFunction = AnimationTimingFunction.StepEnd,
                         iterationCount = AnimationIterationCount.Infinite,
-                        direction = AnimationDirection.Alternate,
                     ),
                 ).verticalAlign(VerticalAlign.Middle)
                 .margin(left = 2.px)
+        }
+        cssRule(CSSMediaQuery.MediaFeature("prefers-reduced-motion", StylePropertyValue("reduce"))) {
+            Modifier.animation(Animation.None)
         }
     }
 

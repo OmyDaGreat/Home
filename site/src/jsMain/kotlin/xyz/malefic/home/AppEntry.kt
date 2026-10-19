@@ -8,7 +8,9 @@ import com.varabyte.kobweb.silk.components.layout.Surface
 import com.varabyte.kobweb.silk.style.common.SmoothColorStyle
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.vh
+import xyz.malefic.home.components.sections.BootSequence
 import xyz.malefic.home.styles.AppColors
+import xyz.malefic.home.util.Boot
 
 @App
 @Composable
@@ -16,7 +18,11 @@ fun AppEntry(content: @Composable () -> Unit) {
     SilkApp {
         AppColors.Provide(AppColors.default) {
             Surface(SmoothColorStyle.toModifier().minHeight(100.vh)) {
-                content()
+                if (Boot.isBooting) {
+                    BootSequence(onFinished = Boot::finish)
+                } else {
+                    content()
+                }
             }
         }
     }

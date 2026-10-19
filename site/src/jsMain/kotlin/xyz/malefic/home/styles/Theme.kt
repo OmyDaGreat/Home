@@ -1,5 +1,6 @@
 package xyz.malefic.home.styles
 
+import com.varabyte.kobweb.compose.css.OverflowWrap
 import com.varabyte.kobweb.compose.css.StyleVariable
 import com.varabyte.kobweb.compose.css.TextTransform
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -11,6 +12,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
 import com.varabyte.kobweb.compose.ui.modifiers.lineHeight
+import com.varabyte.kobweb.compose.ui.modifiers.overflowWrap
 import com.varabyte.kobweb.compose.ui.modifiers.setVariable
 import com.varabyte.kobweb.compose.ui.modifiers.textTransform
 import com.varabyte.kobweb.silk.init.InitSilk
@@ -67,9 +69,11 @@ object AppTypography {
     val displayLgMobile =
         Modifier
             .fontFamily(AppFonts.mono)
-            .fontSize(32.px)
+            .fontSize(28.px)
             .fontWeight(700)
-            .lineHeight(1.2)
+            .lineHeight(1.15)
+            .letterSpacing((-0.02).em)
+            .overflowWrap(OverflowWrap.Anywhere)
 
     val headlineMd =
         Modifier
@@ -192,7 +196,7 @@ class AppPalette : BasePalette() {
     )
     val onSurface by color(onBackground)
     val onSurfaceVariant by color(
-        _paperWhite.shade(0.3f),
+        rgba(74, 78, 86), // #4A4E56: ~8:1 on the light background (paperWhite-derived gray was ~2.5:1)
         _paperWhite.tint(0.1f).desaturate(0.15f),
     )
 
@@ -225,7 +229,7 @@ class AppPalette : BasePalette() {
     // Secondary Colors (Derived from _execGreen)
     // -------------------------------------------------------------
     val secondary by color(
-        _execGreen.darken(0.25f),
+        _execGreen.darken(0.3f),
         _execGreen.lighten(0.05f),
     )
     val onSecondary by color(

@@ -1,11 +1,14 @@
 package xyz.malefic.home.pages
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.OverflowWrap
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.gap
+import com.varabyte.kobweb.compose.ui.modifiers.overflowWrap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.core.Page
@@ -17,13 +20,15 @@ import org.jetbrains.compose.web.css.px
 import xyz.malefic.home.components.widgets.Masonry
 import xyz.malefic.home.components.widgets.MasonryItemStyle
 import xyz.malefic.home.components.widgets.MasonrySquaredStyle
+import xyz.malefic.home.components.widgets.RaisedLinkStyle
+import xyz.malefic.home.components.widgets.StretchedLinkStyle
 import xyz.malefic.home.components.widgets.TerminalTile
 import xyz.malefic.home.styles.AppTypography
 
 data class ProjectData(
     val name: String,
     val description: String,
-    val status: String = "RUNNING",
+    val status: String = "STABLE",
     val extra: @Composable () -> Unit = {},
 )
 
@@ -46,7 +51,6 @@ fun ProjectCategory(
                     Project(
                         pName,
                         pDescription,
-                        "${name.replace(' ', '_')}/",
                         "[$pStatus]",
                     ) { pExtra() }
                 }
@@ -59,21 +63,24 @@ fun ProjectCategory(
 fun Project(
     name: String,
     description: String,
-    titlePrefix: String,
     status: String,
     link: String = "https://github.com/OmyDaGreat/$name/",
     extra: @Composable () -> Unit = {},
+) = TerminalTile(
+    MasonryItemStyle.toModifier(),
+    "./$name",
+    status,
+    interactive = true,
 ) {
-    TerminalTile(
-        MasonryItemStyle.toModifier(),
-        "~/projects/$titlePrefix$name",
-        status,
-    ) {
-        Column(Modifier.padding(24.px).gap(16.px)) {
-            Link(link, name.uppercase(), AppTypography.headlineMd, variant = AlwaysUnderlinedLinkVariant)
-            SpanText(description, AppTypography.bodyMd)
-            extra()
-        }
+    Column(Modifier.padding(24.px).gap(16.px)) {
+        Link(
+            link,
+            name.replace(Regex("(?<=[a-z0-9])(?=[A-Z])"), "\u200B"),
+            StretchedLinkStyle.toModifier().then(AppTypography.headlineMd).overflowWrap(OverflowWrap.Anywhere),
+            variant = AlwaysUnderlinedLinkVariant,
+        )
+        SpanText(description, AppTypography.bodyMd)
+        Box(RaisedLinkStyle.toModifier()) { extra() }
     }
 }
 
