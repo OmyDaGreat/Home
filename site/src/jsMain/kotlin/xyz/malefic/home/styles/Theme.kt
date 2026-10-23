@@ -12,6 +12,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
 import com.varabyte.kobweb.compose.ui.modifiers.lineHeight
+import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.overflowWrap
 import com.varabyte.kobweb.compose.ui.modifiers.setVariable
 import com.varabyte.kobweb.compose.ui.modifiers.textTransform
@@ -57,11 +58,13 @@ object AppFonts {
     val sans = listOf("Space Grotesk", "system-ui", "sans-serif")
 }
 
+// Sizes are in rem so text follows the reader's browser font-size setting. Tracking tightens and leading drops as
+// size grows; small all-caps labels get positive tracking instead.
 object AppTypography {
     val displayLg =
         Modifier
             .fontFamily(AppFonts.mono)
-            .fontSize(48.px)
+            .fontSize(3.cssRem)
             .fontWeight(700)
             .lineHeight(1.1)
             .letterSpacing((-0.02).em)
@@ -69,7 +72,7 @@ object AppTypography {
     val displayLgMobile =
         Modifier
             .fontFamily(AppFonts.mono)
-            .fontSize(28.px)
+            .fontSize(1.75.cssRem)
             .fontWeight(700)
             .lineHeight(1.15)
             .letterSpacing((-0.02).em)
@@ -78,42 +81,57 @@ object AppTypography {
     val headlineMd =
         Modifier
             .fontFamily(AppFonts.mono)
-            .fontSize(24.px)
+            .fontSize(1.5.cssRem)
             .fontWeight(600)
-            .lineHeight(1.4)
+            .lineHeight(1.25)
+            .letterSpacing((-0.01).em)
+
+    val titleMd =
+        Modifier
+            .fontFamily(AppFonts.mono)
+            .fontSize(1.25.cssRem)
+            .fontWeight(600)
+            .lineHeight(1.3)
 
     val bodyLg =
         Modifier
             .fontFamily(AppFonts.sans)
-            .fontSize(18.px)
+            .fontSize(1.125.cssRem)
             .fontWeight(400)
             .lineHeight(1.6)
 
     val bodyMd =
         Modifier
             .fontFamily(AppFonts.sans)
-            .fontSize(16.px)
+            .fontSize(1.cssRem)
             .fontWeight(400)
             .lineHeight(1.5)
 
     val codeMd =
         Modifier
             .fontFamily(AppFonts.mono)
-            .fontSize(16.px)
+            .fontSize(1.cssRem)
             .fontWeight(400)
             .lineHeight(1.5)
 
     val codeSm =
         Modifier
             .fontFamily(AppFonts.mono)
-            .fontSize(14.px)
+            .fontSize(0.875.cssRem)
+            .fontWeight(400)
+            .lineHeight(1.4)
+
+    val codeXs =
+        Modifier
+            .fontFamily(AppFonts.mono)
+            .fontSize(0.75.cssRem)
             .fontWeight(400)
             .lineHeight(1.4)
 
     val labelCaps =
         Modifier
             .fontFamily(AppFonts.mono)
-            .fontSize(12.px)
+            .fontSize(0.75.cssRem)
             .fontWeight(700)
             .lineHeight(1.0)
             .letterSpacing(0.1.em)
@@ -468,6 +486,10 @@ fun initColor(ctx: InitSilkContext) {
 
 @InitSilk
 fun initTypography(ctx: InitSilkContext) {
+    ctx.stylesheet.registerStyleBase("h1, h2, h3, p") {
+        Modifier.margin(0.px)
+    }
+
     ctx.stylesheet.registerStyle("h1, .display-lg") {
         base { AppTypography.displayLgMobile }
         Breakpoint.MD { AppTypography.displayLg }
@@ -477,7 +499,11 @@ fun initTypography(ctx: InitSilkContext) {
         AppTypography.headlineMd
     }
 
-    ctx.stylesheet.registerStyleBase("h3, .body-lg") {
+    ctx.stylesheet.registerStyleBase("h3, .title-md") {
+        AppTypography.titleMd
+    }
+
+    ctx.stylesheet.registerStyleBase(".body-lg") {
         AppTypography.bodyLg
     }
 

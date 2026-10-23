@@ -5,28 +5,30 @@ import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.background
+import com.varabyte.kobweb.compose.ui.modifiers.ariaHidden
+import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.border
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
+import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.height
-import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.compose.ui.modifiers.width
-import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
+import com.varabyte.kobweb.silk.style.extendedByBase
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.LineStyle
-import org.jetbrains.compose.web.css.percent
+import org.jetbrains.compose.web.css.ch
+import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 import xyz.malefic.home.styles.AppColors
 import xyz.malefic.home.styles.AppSpacing
@@ -81,12 +83,30 @@ val EnvLargeSpanStyle =
         2 to 6,
     )
 
-val SkillBarContainerStyle =
+/** How at home I am in a language, shown as a 4-segment meter plus a word, instead of a meaningless percentage. */
+enum class Fluency(
+    val label: String,
+    val segments: Int,
+) {
+    DAILY("daily", 4),
+    FLUENT("fluent", 3),
+    COMFORTABLE("comfortable", 2),
+    LEARNING("learning", 1),
+}
+
+const val FLUENCY_SEGMENTS = 4
+
+val FluencySegmentStyle =
     CssStyle.base {
         Modifier
-            .fillMaxWidth()
-            .height(6.px)
-            .background(AppColors.static.surfaceVariant.variable)
+            .width(0.625.cssRem)
+            .height(0.375.cssRem)
+            .backgroundColor(AppColors.static.surfaceVariant.variable)
+    }
+
+val FilledFluencySegmentStyle =
+    FluencySegmentStyle.extendedByBase {
+        Modifier.backgroundColor(AppColors.static.primary.variable)
     }
 
 val EnvironmentItemStyle =
@@ -100,7 +120,7 @@ val EnvironmentItemStyle =
 @Composable
 fun SkillModule(
     title: String,
-    skills: List<Pair<String, Int>>,
+    skills: List<Pair<String, Fluency>>,
     modifier: Modifier = Modifier,
     size: ModuleSize = ModuleSize.MEDIUM,
 ) {
@@ -113,18 +133,21 @@ fun SkillModule(
 
     TerminalTile(title = title, modifier = spanModifier.then(modifier)) {
         Column(Modifier.padding(AppSpacing.gapOuter).gap(AppSpacing.gapInner).fillMaxSize(), Arrangement.Center) {
-            skills.forEach { (name, progress) ->
-                Column(Modifier.fillMaxWidth()) {
-                    SpanText(name, AppTypography.codeSm)
-                    Box(SkillBarContainerStyle.toModifier().margin(top = 4.px)) {
-                        Box(
-                            Modifier
-                                .background(AppColors.static.primary.current)
-                                .fillMaxHeight()
-                                .width(progress.percent)
-                                .zIndex(1),
-                        )
+            skills.forEach { (name, fluency) ->
+                Row(Modifier.fillMaxWidth().gap(12.px), verticalAlignment = Alignment.CenterVertically) {
+                    SpanText(name.uppercase(), AppTypography.codeSm.weight(1f))
+                    // The word carries the meaning; the meter is a glanceable echo of it
+                    Row(Modifier.gap(2.px).ariaHidden()) {
+                        repeat(FLUENCY_SEGMENTS) { i ->
+                            Box((if (i < fluency.segments) FilledFluencySegmentStyle else FluencySegmentStyle).toModifier())
+                        }
                     }
+                    SpanText(
+                        fluency.label,
+                        AppTypography.codeSm
+                            .color(AppColors.static.onSurfaceVariant.current)
+                            .width(11.ch),
+                    )
                 }
             }
         }

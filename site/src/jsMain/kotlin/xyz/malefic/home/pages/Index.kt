@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.classNames
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
@@ -19,8 +18,13 @@ import com.varabyte.kobweb.silk.components.navigation.AlwaysUnderlinedLinkVarian
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
+import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.H1
+import org.jetbrains.compose.web.dom.H2
+import org.jetbrains.compose.web.dom.Text
 import xyz.malefic.home.components.widgets.EnvironmentModule
+import xyz.malefic.home.components.widgets.Fluency
 import xyz.malefic.home.components.widgets.LogEntry
 import xyz.malefic.home.components.widgets.SkillModule
 import xyz.malefic.home.components.widgets.SpanStyle
@@ -59,7 +63,8 @@ val AboutSmallSpanStyle =
 fun HomePage() {
     SimpleGrid(
         numColumns(base = 1, sm = 4, md = 8, lg = 12),
-        Modifier.fillMaxWidth().gap(16.px).gridAutoRows { size(240.px) },
+        // Rows grow with their content, so larger text (or a narrow screen) never spills out of a tile
+        Modifier.fillMaxWidth().gap(16.px).gridAutoRows { minmax(15.cssRem, auto) },
     ) {
         TerminalTile(
             HeroSpanStyle.toModifier(),
@@ -68,7 +73,8 @@ fun HomePage() {
             Modifier.color(AppColors.static.signalViolet.current),
         ) {
             Column(Modifier.padding(24.px).fillMaxSize(), verticalArrangement = Arrangement.Center) {
-                SpanText("MALEFIC_PORTFOLIO", Modifier.classNames("display-lg"))
+                H1 { Text("OM GUPTA") }
+                SpanText("aka malefic", AppTypography.codeMd.color(AppColors.static.primary.current).margin(top = 8.px))
                 SpanText(
                     "High-performance creative engineering specializing in Kotlin, Linux ecosystems, and minimally scoped but maximal utility architectures.",
                     AppTypography.bodyLg.color(AppColors.static.onSurfaceVariant.current).margin(top = 16.px),
@@ -81,7 +87,7 @@ fun HomePage() {
             "~/identity_node.txt",
         ) {
             Column(Modifier.padding(24.px).gap(16.px).fillMaxSize(), verticalArrangement = Arrangement.Center) {
-                SpanText("OM GUPTA / MALEFIC", Modifier.classNames("display-lg"))
+                H2 { Text("WHOAMI") }
                 SpanText(
                     "I'm a developer focused on internals and devtools, but with a wide range of experience in various fields. I'm currently pursuing an AB in Computer Science at Harvard University, and am always looking for new opportunities to learn and grow as well as people to collaborate with!",
                     AppTypography.bodyMd,
@@ -94,7 +100,7 @@ fun HomePage() {
             "contact_node.txt",
         ) {
             Column(Modifier.padding(16.px).gap(8.px)) {
-                SpanText("CONNECT", AppTypography.headlineMd)
+                H2 { Text("CONNECT") }
                 SpanText("DISCORD: ._malefic_.", AppTypography.codeSm)
                 Link(
                     "https://github.com/OmyDaGreat",
@@ -113,7 +119,12 @@ fun HomePage() {
 
         SkillModule(
             "~/code/dialect",
-            listOf("KOTLIN" to 95, "JAVA" to 80, "OCaml" to 60, "Python" to 60),
+            listOf(
+                "Kotlin" to Fluency.DAILY,
+                "Java" to Fluency.FLUENT,
+                "OCaml" to Fluency.FLUENT,
+                "Python" to Fluency.COMFORTABLE,
+            ),
             size = ModuleSize.SMALL,
         )
 

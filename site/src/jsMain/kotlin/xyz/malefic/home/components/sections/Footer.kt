@@ -28,6 +28,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.LineStyle
+import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 import xyz.malefic.home.styles.AppColors
 import xyz.malefic.home.styles.AppTypography
@@ -44,8 +45,8 @@ val FooterContainerStyle =
     CssStyle.base {
         Modifier
             .fillMaxWidth()
-            .height(32.px)
-            .minHeight(32.px)
+            .height(2.cssRem)
+            .minHeight(2.cssRem)
             .background(AppColors.static.surfaceContainerHigh.variable)
             .borderTop(1.px, LineStyle.Solid, AppColors.static.outline.variable)
             .padding(leftRight = 24.px)

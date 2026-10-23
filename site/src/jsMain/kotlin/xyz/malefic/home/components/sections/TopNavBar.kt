@@ -68,6 +68,7 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.LineStyle
+import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
@@ -122,8 +123,8 @@ val HeaderContainerStyle =
     CssStyle.base {
         Modifier
             .fillMaxWidth()
-            .height(48.px)
-            .minHeight(48.px)
+            .height(3.cssRem)
+            .minHeight(3.cssRem)
             .background(AppColors.static.surface.variable)
             .borderBottom(1.px, LineStyle.Solid, AppColors.static.outline.variable)
             .padding(leftRight = 24.px)
@@ -152,12 +153,12 @@ val HeaderIconButtonStyle =
                 .display(DisplayStyle.LegacyInlineFlex)
                 .alignItems(AlignItems.Center)
                 .justifyContent(JustifyContent.Center)
-                .size(32.px)
+                .size(2.cssRem)
                 .padding(0.px)
                 .border(0.px)
                 .backgroundColor(Colors.Transparent)
                 .color(AppColors.static.primary.variable)
-                .fontSize(18.px)
+                .fontSize(1.125.cssRem)
                 .cursor(Cursor.Pointer)
                 .transition(Transition.group(listOf("background-color", "scale"), 120.ms, TransitionTimingFunction.EaseOut))
         }

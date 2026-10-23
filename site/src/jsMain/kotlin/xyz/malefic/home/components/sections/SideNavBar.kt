@@ -61,8 +61,12 @@ import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.Position
+import org.jetbrains.compose.web.css.cssRem
+import org.jetbrains.compose.web.css.em
+import org.jetbrains.compose.web.css.minus
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.percent
+import org.jetbrains.compose.web.css.plus
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Span
 import xyz.malefic.home.styles.AppColors
@@ -74,8 +78,8 @@ val SideNavContainerStyle =
         base {
             Modifier
                 .display(DisplayStyle.None)
-                .width(256.px)
-                .minWidth(256.px)
+                .width(16.cssRem)
+                .minWidth(16.cssRem)
                 .flexShrink(0)
                 .fillMaxHeight()
                 .background(AppColors.static.surfaceContainerLowest.variable)
@@ -143,6 +147,8 @@ val GraphGutterStyle =
             .width(12.px)
             .flexShrink(0)
             .alignSelf(AlignSelf.Stretch)
+            // Match the hash line's font size so `em` offsets track the first line of text at any text size
+            .fontSize(0.875.cssRem)
     }
 
 val GraphLineStyle =
@@ -159,7 +165,7 @@ val CommitNodeStyle =
         Modifier
             .position(Position.Absolute)
             .left(1.px)
-            .top(5.px)
+            .top(0.7.em - 5.px)
             .size(10.px)
             .borderRadius(50.percent)
             .backgroundColor(AppColors.static.surfaceContainerLowest.variable)
@@ -176,8 +182,7 @@ val HeadCommitNodeStyle =
 
 val CommitMessageStyle =
     CssStyle.base {
-        AppTypography.codeSm
-            .fontSize(12.px)
+        AppTypography.codeXs
             .color(AppColors.static.onSurfaceVariant.variable)
     }
 
@@ -192,7 +197,7 @@ fun SideNavBar() {
         Column(SideNavHeaderStyle.toModifier()) {
             SpanText("~/dev/portfolio", AppTypography.labelCaps.color(AppColors.static.onSurface.current))
             Row(Modifier.gap(6.px), verticalAlignment = Alignment.CenterVertically) {
-                FaCodeBranch(Modifier.fontSize(12.px).color(AppColors.static.secondary.current))
+                FaCodeBranch(Modifier.fontSize(0.75.cssRem).color(AppColors.static.secondary.current))
                 SpanText("main", AppTypography.codeSm.color(AppColors.static.onSurfaceVariant.current))
             }
         }
@@ -218,7 +223,7 @@ fun SideNavBar() {
         }
 
         Row(SideNavFooterStyle.toModifier(), verticalAlignment = Alignment.CenterVertically) {
-            FaCircleCheck(Modifier.fontSize(14.px).color(AppColors.static.secondary.current))
+            FaCircleCheck(Modifier.fontSize(0.875.cssRem).color(AppColors.static.secondary.current))
             Column {
                 SpanText("On branch main", AppTypography.codeSm.color(AppColors.static.onSurface.current))
                 SpanText("up to date with origin/main", CommitMessageStyle.toModifier())
@@ -245,9 +250,9 @@ private fun CommitRow(
         Box(GraphGutterStyle.toModifier()) {
             val line =
                 when (graphPosition) {
-                    GraphPosition.FIRST -> Modifier.top(10.px).bottom((-6).px)
+                    GraphPosition.FIRST -> Modifier.top(0.7.em).bottom((-6).px)
                     GraphPosition.MIDDLE -> Modifier.top((-6).px).bottom((-6).px)
-                    GraphPosition.LAST -> Modifier.top((-6).px).height(16.px)
+                    GraphPosition.LAST -> Modifier.top((-6).px).height(0.7.em + 6.px)
                 }
             Box(GraphLineStyle.toModifier().then(line))
             Box((if (isHead) HeadCommitNodeStyle else CommitNodeStyle).toModifier())
